@@ -1,5 +1,5 @@
 package gameOfCluedo.squares;
 
-public class RoomSquare {
+public class RoomSquare implements Square {
 
 }

@@ -1,5 +1,7 @@
 package gameOfCluedo;
 
-public class Board {
+import gameOfCluedo.squares.*;
 
+public class Board {
+	private Square[][] board;
 }

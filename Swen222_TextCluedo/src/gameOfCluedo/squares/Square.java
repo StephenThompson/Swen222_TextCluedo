@@ -1,5 +1,5 @@
 package gameOfCluedo.squares;
 
-public class Square {
+public interface Square {
 
 }

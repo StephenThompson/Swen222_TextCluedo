@@ -9,7 +9,7 @@ public class Dice {
 	 * Returns a randomly generated number between 1 and 6
 	 * @return int
 	 */
-	static int roll(){
+	public static int roll(){
 		return (int)(1 + Math.random()*6);
 	}
 }
