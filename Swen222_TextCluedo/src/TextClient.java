@@ -1,6 +1,8 @@
 import gameOfCluedo.*;
 
 public class TextClient {
+	private GameOfCluedo goc;
+
 	private enum playerOption{
 		Move, Accuse, Suggest
 	}
@@ -21,10 +23,15 @@ public class TextClient {
 		return null;
 	}
 
+	private void gameLoop(){
+
+	}
+
 	public static void main(String[] args) {
 		System.out.println("Welcome to Game of Cluedo");
 		System.out.println("Callum Gill and Stephen Thompson, 2015");
-
+		for (int i = 2000; i < 2500; i++)
+			System.out.println(i + " : " + (char)(i));
 		//Get player number
 		//Start Game
 		//Loop through players until game has ended
