@@ -9,4 +9,12 @@ public class Room {
 		this.name = name;
 		this.passage = passage;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Room getPassage() {
+		return passage;
+	}
 }

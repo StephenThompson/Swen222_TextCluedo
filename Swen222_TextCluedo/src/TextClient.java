@@ -6,15 +6,21 @@ public class TextClient {
 	private GameOfCluedo goc;
 
 	private enum playerOption{
-		Move, Accuse, Suggest
+		MOVE, SUGGEST, ACCUSE
 	}
 
-	private void playerTurn(Player player){
+	private playerOption playerTurn(Player player){
+		System.out.println("-- Make a choice --");
+		System.out.println("1\tMove");
+		System.out.println("2\tSuggest");
+		System.out.println("3\tAccuse");
 
+		//return playerOption.values()[readInt("Choice : ")];
+		return playerOption.MOVE;
 	}
 
 	private void getMove(int diceRoll){
-
+		System.out.println(diceRoll);
 	}
 
 	private GuessTuple getSuggest(){
@@ -44,15 +50,23 @@ public class TextClient {
 		goc.startGame();
 
 		//Loop through players until game has ended
-		while (!goc.checkGameOver()){
+		/*while (!goc.checkGameOver()){
 		//	Ask player option
-			//playerOption = playerTurn(goc.getNextPlayer());
+			playerOption opt = playerTurn(null);
 		//	Respond to player's choice
-			/*switch (){
-
-			}*/
+			switch (opt.ordinal()){
+				case 0:
+					getMove(Dice.roll());
+					break;
+				case 1:
+					getSuggest();
+					break;
+				case 2:
+					getAccuse();
+					break;
+			}
 		//
-		}
+		}*/
 		//End game
 	}
 
