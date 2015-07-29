@@ -66,5 +66,20 @@ public class Board {
 	}
 
 
+	public void draw(){
+		for (int y=0; y < board[0].length; y++){
+			for(int x =0; x<board.length; x++){
+				if(board[x][y] instanceof BlankSquare){
+					System.out.print("0 ");
+				}else if(board[x][y] instanceof RoomSquare){
+					System.out.print("1 ");
+				}else if (board[x][y] instanceof DoorSquare){
+					System.out.println("E ");
+				}
+			}
+			System.out.println("\n");
+		}
+	}
+
 
 }
