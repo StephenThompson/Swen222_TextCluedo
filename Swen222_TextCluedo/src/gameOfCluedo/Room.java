@@ -17,4 +17,17 @@ public class Room {
 	public Room getPassage() {
 		return passage;
 	}
+
+	/**
+	 * Sets passage if it is still null
+	 * @param passage
+	 * @return
+	 */
+	public boolean setPassage(Room passage) {
+		if(this.passage==null){
+			this.passage = passage;
+			return true;
+		}
+		return false;
+	}
 }
