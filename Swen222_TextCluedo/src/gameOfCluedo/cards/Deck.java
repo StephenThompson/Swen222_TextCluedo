@@ -30,7 +30,7 @@ public class Deck {
 		RoomCard envRoom = rooms.get((int)(Math.random()*rooms.size()));
 		GuessTuple envelope = new GuessTuple(envChar, envWeapon, envRoom);
 
-		//Clears players hands
+		//Clears players hands.
 		for(Player p:players){
 			p.gethand().clear();
 		}
