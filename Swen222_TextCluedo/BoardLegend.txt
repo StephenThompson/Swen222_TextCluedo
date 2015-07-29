@@ -1,0 +1,11 @@
+0 = hallway
+1 = room/wall
+A = Kitchen
+B = Ballroom
+C = Conservatory
+D = Dining Room
+E = Billard
+F = Library
+G = Lounge
+H = Hall
+I = Study
