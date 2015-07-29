@@ -1,13 +1,17 @@
 package gameOfCluedo;
 
-import java.util.List;
+import java.util.*;
 
 import gameOfCluedo.cards.Card;
 
 public class Player {
-	private List<Card> hand;
+	private List<Card> hand = new ArrayList<Card>();
 
 	public Card checkGuess(GuessTuple guess){
 		return null;
+	}
+
+	public List<Card> gethand(){
+		return hand;
 	}
 }
