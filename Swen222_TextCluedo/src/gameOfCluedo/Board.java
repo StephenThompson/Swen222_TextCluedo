@@ -79,17 +79,24 @@ public class Board {
 	}
 
 	public void draw(){
+		System.out.print("  ");
+		for(int x =0; x<board.length; x++){
+			System.out.print(" " + (char)(x+65));
+		}
+		System.out.println();
+		
 		for (int y=0; y < board[0].length; y++){
+			System.out.printf("%2d ", y);
 			for(int x =0; x<board.length; x++){
 				if(board[x][y] instanceof BlankSquare){
-					System.out.print("0 ");
+					System.out.print("▗▚");
 				}else if(board[x][y] instanceof RoomSquare){
-					System.out.print("1 ");
+					System.out.print("▐█");
 				}else if (board[x][y] instanceof DoorSquare){
-					System.out.println("E ");
+					System.out.print("▕░");
 				}
 			}
-			System.out.println("\n");
+			System.out.println();
 		}
 	}
 
