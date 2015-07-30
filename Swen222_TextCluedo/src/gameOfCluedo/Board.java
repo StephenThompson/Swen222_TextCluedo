@@ -17,13 +17,7 @@ public class Board {
 										"Billiard Room", "Library", "Lounge", "Hall", "Study"};
 
 	public Board(String file){
-		//Creates rooms
-		for(int i = 0; i<roomTitles.length; i++){
-			rooms.add(new Room(roomTitles[i], null));
-		}
-
-		//TODO Create passages
-
+		createRooms();
 		//Scan File to create board
 		try{
 			Scanner s = new Scanner(new File("src/CluedoBoard.txt"));
@@ -65,6 +59,24 @@ public class Board {
 		}
 	}
 
+	/**
+	 * Creates the rooms and passages between them
+	 */
+	private void createRooms(){
+		//Creates rooms
+		for(int i = 0; i<roomTitles.length; i++){
+			rooms.add(new Room(roomTitles[i], null));
+		}
+		//Create passages
+		//Kitchen->Study
+		rooms.get(0).setPassage(rooms.get(8));
+		//Study->Kitchen
+		rooms.get(8).setPassage(rooms.get(0));
+		//Conservatory->Lounge
+		rooms.get(2).setPassage(rooms.get(6));
+		//Lounge->Conservatory
+		rooms.get(6).setPassage(rooms.get(2));
+	}
 
 	public void draw(){
 		for (int y=0; y < board[0].length; y++){
