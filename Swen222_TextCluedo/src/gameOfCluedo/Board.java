@@ -9,9 +9,9 @@ import java.util.Scanner;
 import gameOfCluedo.squares.*;
 
 public class Board {
-	private Square[][] board;
 	public final int xSize = 25;
 	public final int ySize = 25;
+	private Square[][] board = new Square[xSize][ySize];
 	public final List<Room> rooms = new ArrayList<Room>();
 	private final String[] roomTitles = {"Kitchen","Ball Room", "Conservatory", "Dining Room",
 										"Billiard Room", "Library", "Lounge", "Hall", "Study"};
@@ -26,7 +26,7 @@ public class Board {
 
 		//Scan File to create board
 		try{
-			Scanner s = new Scanner(new File("../../CluedoBoard"));
+			Scanner s = new Scanner(new File("src/CluedoBoard.txt"));
 			int xPos = 0;
 			int yPos = 0;
 			while(s.hasNext()){
@@ -50,7 +50,7 @@ public class Board {
 					//gets char
 					char c = room.charAt(0);
 					//creates door to room (63 is A, rooms should be in orde of ABC in list)
-					board[xPos][yPos] = new DoorSquare(rooms.get(((int)c)-63));
+					board[xPos][yPos] = new DoorSquare(rooms.get(((int)c)-65));
 				}
 				//Updates x and y
 				xPos++;
@@ -61,7 +61,7 @@ public class Board {
 			}
 			s.close();
 		}catch(IOException e){
-			System.out.println("Error loading board");
+			System.out.println("Error loading board - " + e.getMessage());
 		}
 	}
 
