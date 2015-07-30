@@ -15,7 +15,7 @@ public class GameOfCluedo {
 
 	public GameOfCluedo() {
 		super();
-		this.board = new Board();
+		this.board = new Board("");
 	}
 
 	/**
@@ -67,6 +67,7 @@ public class GameOfCluedo {
 		System.out.println("Character : " + envelope.getCharacter().getTitle());
 		System.out.println("Weapon    : " + envelope.getWeapon().getTitle());
 		System.out.println("Room      : " + envelope.getRoom().getTitle());
+
 	}
 
 	public boolean move(int x, int y){
@@ -79,7 +80,7 @@ public class GameOfCluedo {
 	 * @return Card
 	 */
 	public Card guess(GuessTuple guess){
-		return getNextPlayer().checkGuess(guess);
+		return nextPlayer().checkGuess(guess);
 	}
 
 	/**
@@ -109,7 +110,13 @@ public class GameOfCluedo {
 		return currentPlayer;
 	}*/
 
-	private Player getNextPlayer(){
-		return null;
+	public Player nextPlayer(){
+		Player nextPlayer = currentPlayer;
+		if(players.indexOf(currentPlayer)<players.size()-1){
+			currentPlayer = players.get(players.indexOf(currentPlayer)+1);
+		}else{
+			currentPlayer = players.get(0);
+		}
+		return nextPlayer;
 	}
 }

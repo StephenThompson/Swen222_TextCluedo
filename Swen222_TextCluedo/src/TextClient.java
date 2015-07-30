@@ -15,8 +15,8 @@ public class TextClient {
 		System.out.println("2\tSuggest");
 		System.out.println("3\tAccuse");
 
-		//return playerOption.values()[readInt("Choice : ")];
-		return playerOption.MOVE;
+		return playerOption.values()[readInt("Choice : ")-1];
+		//return playerOption.MOVE;
 	}
 
 	private void getMove(int diceRoll){
@@ -48,6 +48,7 @@ public class TextClient {
 
 		//Start Game
 		goc.startGame(3);
+		System.out.println(playerTurn(goc.nextPlayer()));
 
 		//Loop through players until game has ended
 		/*while (!goc.checkGameOver()){
