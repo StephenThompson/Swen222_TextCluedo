@@ -15,8 +15,8 @@ public class TextClient {
 		System.out.println("2\tSuggest");
 		System.out.println("3\tAccuse");
 
+
 		return playerOption.values()[readInt("Choice : ")-1];
-		//return playerOption.MOVE;
 	}
 
 	private void getMove(int diceRoll){
@@ -36,13 +36,13 @@ public class TextClient {
 		System.out.println("Callum Gill and Stephen Thompson\nversion 1.0\n2015");
 
 		//Get player number
-		/*int numPlayers = 0;
+		int numPlayers = 0;
 		while (numPlayers < 3 || numPlayers > 6){
 			numPlayers = readInt("\nPlease input the number of players : ");
 			if (numPlayers < 3 || numPlayers > 6) {
 				System.out.println("There must be between 3 - 6 players!");
 			}
-		}*/
+		}
 
 		goc = new GameOfCluedo();
 
@@ -85,6 +85,7 @@ public class TextClient {
 				while (!reader.hasNextInt() && reader.hasNext()){
 					reader.next();
 				}
+
 			}
 		}
 	}
