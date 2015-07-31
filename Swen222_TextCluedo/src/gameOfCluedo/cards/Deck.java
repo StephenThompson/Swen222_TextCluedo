@@ -47,7 +47,7 @@ public class Deck {
 				if(fullDeck.isEmpty()){break;}
 				Card nextCard = fullDeck.get((int)(Math.random()*fullDeck.size()));
 				fullDeck.remove(nextCard);
-				p.gethand().add(nextCard);
+				p.addToHand(nextCard);
 			}
 		}
 

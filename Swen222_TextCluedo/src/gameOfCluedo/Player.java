@@ -14,4 +14,8 @@ public class Player {
 	public List<Card> gethand(){
 		return hand;
 	}
+
+	public void addToHand(Card c){
+		hand.add(c);
+	}
 }

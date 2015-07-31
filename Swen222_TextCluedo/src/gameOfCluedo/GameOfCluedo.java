@@ -62,6 +62,7 @@ public class GameOfCluedo {
 		for (int i = 0; i < numPlayers; i++){
 			players.add(new Player());
 		}
+		currentPlayer = players.get(0);
 		envelope = deck.deal(players);
 
 		System.out.println("Character : " + envelope.getCharacter().getTitle());
@@ -100,23 +101,33 @@ public class GameOfCluedo {
 		return players.size() == 1;
 	}
 
-	/*
-	public Room[] getReachableRooms(int diceRoll){
-		return null;
+	/**
+	 * Returns reachable rooms for currentPlayer with the given dice roll
+	 * @param diceRoll
+	 * @return
+	 */
+	/*public Room[] getReachableRooms(int diceRoll){
+
 	}*/
 
-
-	/*public Player getCurrentPlayer(){
+	/**
+	 * Return currentPlayer
+	 * @return
+	 */
+	public Player getCurrentPlayer(){
 		return currentPlayer;
-	}*/
+	}
 
+	/**
+	 * Sets current player to the next player and return said player
+	 * @return
+	 */
 	public Player nextPlayer(){
-		Player nextPlayer = currentPlayer;
 		if(players.indexOf(currentPlayer)<players.size()-1){
 			currentPlayer = players.get(players.indexOf(currentPlayer)+1);
 		}else{
 			currentPlayer = players.get(0);
 		}
-		return nextPlayer;
+		return currentPlayer;
 	}
 }
