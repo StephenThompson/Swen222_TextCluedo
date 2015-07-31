@@ -24,7 +24,7 @@ public abstract class Card {
 	public boolean equals(Object obj) {
 		if (obj == null)
 			return false;
-		if (obj instanceof Card){
+		if (this.getClass() == obj.getClass()){
 			Card other = (Card) obj;
 			return title.equals(other.title);
 		}

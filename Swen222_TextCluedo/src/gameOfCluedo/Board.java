@@ -3,6 +3,8 @@ package gameOfCluedo;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,6 +17,8 @@ public class Board {
 	public final List<Room> rooms = new ArrayList<Room>();
 	private final String[] roomTitles = {"Kitchen","Ball Room", "Conservatory", "Dining Room",
 										"Billiard Room", "Library", "Lounge", "Hall", "Study"};
+	private Map<Player, Position> playerPos = new HashMap<Player, Position>();
+	private final int[][] startingPositions = {{9,0}, {14,0}, {23,6}, {23,19}, {7, 24}, {0, 17}};
 
 	public Board(String file){
 		createRooms();
@@ -58,6 +62,10 @@ public class Board {
 			System.out.println("Error loading board - " + e.getMessage());
 		}
 	}
+	public void addPlayers(Player player){
+		//startingPositions[player.][0];
+		playerPos.put(player, new Position((int)(Math.random()*xSize), (int)(Math.random()*ySize)));
+	}
 
 	/*public boolean validMove(Player p, ){
 
@@ -92,21 +100,25 @@ public class Board {
 		for (int y=0; y < board[0].length; y++){
 			System.out.printf("%2d ", y);
 			for(int x =0; x<board.length; x++){
-				if(board[x][y] instanceof BlankSquare){
-					//System.out.print("▗▚");
-					System.out.print(" ░");
-				}else if(board[x][y] instanceof RoomSquare){
-					System.out.print("▐█");
-				}else if (board[x][y] instanceof DoorSquare){
-					//System.out.print("▕░");
-					if (board[x][y+1] instanceof RoomSquare)
-						System.out.print("↓↓");
-					else if (board[x-1][y] instanceof RoomSquare)
-						System.out.print(" ←");
-					else if (board[x][y-1] instanceof RoomSquare)
-						System.out.print("↑↑");
-					else if (board[x+1][y] instanceof RoomSquare)
-						System.out.print(" →");
+				if (playerPos.containsValue(new Position(x,y))){
+					System.out.print(" P");
+				} else {
+					if(board[x][y] instanceof BlankSquare){
+						//System.out.print("▗▚");
+						System.out.print(" ░");
+					}else if(board[x][y] instanceof RoomSquare){
+						System.out.print("▐█");
+					}else if (board[x][y] instanceof DoorSquare){
+						//System.out.print("▕░");
+						if (board[x][y+1] instanceof RoomSquare)
+							System.out.print("↓↓");
+						else if (board[x-1][y] instanceof RoomSquare)
+							System.out.print(" ←");
+						else if (board[x][y-1] instanceof RoomSquare)
+							System.out.print("↑↑");
+						else if (board[x+1][y] instanceof RoomSquare)
+							System.out.print(" →");
+					}
 				}
 			}
 			System.out.println();
