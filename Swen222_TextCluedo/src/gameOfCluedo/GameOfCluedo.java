@@ -56,14 +56,21 @@ public class GameOfCluedo {
 		roomCards.add(new RoomCard("Study"));
 
 		// Setup game
-		deck = new Deck(charCards, weaponCards, roomCards);
 		players = new ArrayList<Player>();
-
-		for (int i = 0; i < numPlayers; i++){
-			players.add(new Player());
+		for(int i=0; i<numPlayers; i++){
+			if(i>=Player.Character.values().length){
+				System.out.println("What we looping for too many players : " + i);
+			}else{
+				System.out.println("Character : " + i);
+				players.add(new Player(Player.Character.values()[i]));
+			}
 		}
+
+		deck = new Deck(charCards, weaponCards, roomCards);
 		currentPlayer = players.get(0);
 		envelope = deck.deal(players);
+
+
 
 		System.out.println("Character : " + envelope.getCharacter().getTitle());
 		System.out.println("Weapon    : " + envelope.getWeapon().getTitle());
@@ -71,6 +78,12 @@ public class GameOfCluedo {
 
 	}
 
+	/**
+	 * Attempts to move current player to new x,y.
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public boolean move(int x, int y){
 		return false;
 	}
@@ -93,6 +106,8 @@ public class GameOfCluedo {
 		return guess.equals(envelope);
 	}
 
+
+
 	/**
 	 * Checks whether there is one player remaining
 	 * @return boolean
@@ -107,7 +122,7 @@ public class GameOfCluedo {
 	 * @return
 	 */
 	/*public Room[] getReachableRooms(int diceRoll){
-
+		board.
 	}*/
 
 	/**
@@ -117,6 +132,7 @@ public class GameOfCluedo {
 	public Player getCurrentPlayer(){
 		return currentPlayer;
 	}
+
 
 	/**
 	 * Sets current player to the next player and return said player

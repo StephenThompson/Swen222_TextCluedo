@@ -13,8 +13,8 @@ public class TextClient {
 		MOVE, SUGGEST, ACCUSE
 	}
 
-	private playerOption playerTurn(Player player){
-		//System.out.println();
+	private playerOption playerTurn(Player p){
+		System.out.println(p.getName().name() + "'s turn!");
 		System.out.println("-- Make a choice --");
 		System.out.println("1\tMove");
 		System.out.println("2\tSuggest");
@@ -28,9 +28,10 @@ public class TextClient {
 		return playerOption.values()[selected-1];
 	}
 
-	private void getMove(int diceRoll){
-		System.out.println(diceRoll);
-		//Room[] reachableRooms = goc.reachableRooms()
+	private void getMove(int diceRoll, Player player){
+		System.out.println("You Rolled a : " + diceRoll);
+		//System.out.println("You")
+		//Room[] reachableRooms = goc.reachableRooms();
 
 	}
 
@@ -59,16 +60,16 @@ public class TextClient {
 
 		//Start Game
 		goc.startGame(numPlayers);
-		System.out.println(playerTurn(goc.nextPlayer()));
 
 		//Loop through players until game has ended
 		while (!goc.checkGameOver()){
 		//	Ask player option
-			playerOption opt = playerTurn(goc.getCurrentPlayer());
+			Player currentPlayer = goc.getCurrentPlayer();
+			playerOption opt = playerTurn(currentPlayer);
 		//	Respond to player's choice
 			switch (opt){
 				case MOVE:
-					getMove(Dice.roll());
+					getMove(Dice.roll(), currentPlayer);
 					break;
 				case SUGGEST:
 					getSuggest();
@@ -77,7 +78,7 @@ public class TextClient {
 					getAccuse();
 					break;
 			}
-		//
+			goc.nextPlayer();
 		}
 		//End game
 	}
