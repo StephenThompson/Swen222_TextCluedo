@@ -4,7 +4,7 @@ import java.util.*;
 import gameOfCluedo.cards.*;
 
 public class Player {
-	public enum Character{
+	static public enum Character{
 		Miss_Scarlett, Colonel_Mustard, Mrs_White
 		,The_Reverend_Green ,Mrs_Peacock ,Professor_Plum
 	}
@@ -15,6 +15,10 @@ public class Player {
 	public Player(Character name) {
 		super();
 		this.name = name;
+	}
+
+	public Character getName(){
+		return name;
 	}
 
 	public Card checkGuess(GuessTuple guess){
