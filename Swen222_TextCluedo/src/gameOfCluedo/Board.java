@@ -59,6 +59,10 @@ public class Board {
 		}
 	}
 
+	/*public boolean validMove(Player p, ){
+
+	}*/
+
 	/**
 	 * Creates the rooms and passages between them
 	 */
@@ -84,7 +88,7 @@ public class Board {
 			System.out.print(" " + (char)(x+65));
 		}
 		System.out.println();
-		
+
 		for (int y=0; y < board[0].length; y++){
 			System.out.printf("%2d ", y);
 			for(int x =0; x<board.length; x++){
