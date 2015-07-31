@@ -4,8 +4,18 @@ import java.util.*;
 import gameOfCluedo.cards.*;
 
 public class Player {
+	public enum Character{
+		Miss_Scarlett, Colonel_Mustard, Mrs_White
+		,The_Reverend_Green ,Mrs_Peacock ,Professor_Plum
+	}
+
 	private List<Card> hand = new ArrayList<Card>();
-	private Position pos;
+	private Character name;
+
+	public Player(Character name) {
+		super();
+		this.name = name;
+	}
 
 	public Card checkGuess(GuessTuple guess){
 		for (Card c : hand){
