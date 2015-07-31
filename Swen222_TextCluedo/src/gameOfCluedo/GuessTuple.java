@@ -4,13 +4,13 @@ import gameOfCluedo.cards.*;
 
 /**
  * This class is used for suggestions, accusations and the envelope in the Game of Cluedo.
- * @author thompsstep2
+ * @author Stephen Thompson
  *
  */
 public class GuessTuple {
-	private CharCard character;
-	private WeaponCard weapon;
-	private RoomCard room;
+	private final CharCard character;
+	private final WeaponCard weapon;
+	private final RoomCard room;
 
 	public GuessTuple(CharCard character, WeaponCard weapon, RoomCard room) {
 		super();
@@ -41,5 +41,28 @@ public class GuessTuple {
 	 */
 	public RoomCard getRoom() {
 		return room;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((character == null) ? 0 : character.hashCode());
+		result = prime * result + ((room == null) ? 0 : room.hashCode());
+		result = prime * result + ((weapon == null) ? 0 : weapon.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object o){
+		if (o == null){
+			return false;
+		}
+		if (o instanceof GuessTuple){
+			GuessTuple t = (GuessTuple)o;
+			return character == t.character && weapon == t.weapon && room == t.room;
+		}
+		return false;
 	}
 }
