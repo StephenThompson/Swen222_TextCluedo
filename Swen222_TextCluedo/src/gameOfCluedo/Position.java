@@ -3,7 +3,7 @@ package gameOfCluedo;
 import java.awt.Point;
 
 public class Position {
-	private Room currentRoom;
+	private Room room;
 	private int x, y;
 
 	public Position(int x, int y) {
@@ -12,12 +12,36 @@ public class Position {
 		this.y = y;
 	}
 
+	public Position(Room room) {
+		super();
+		this.room = room;
+	}
+
+	public boolean inRoom(){
+		if(room!=null){
+			return true;
+		}
+		return false;
+	}
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((currentRoom == null) ? 0 : currentRoom.hashCode());
+				+ ((room == null) ? 0 : room.hashCode());
 		result = prime * result + x;
 		result = prime * result + y;
 		return result;
@@ -32,10 +56,10 @@ public class Position {
 		if (getClass() != obj.getClass())
 			return false;
 		Position other = (Position) obj;
-		if (currentRoom == null) {
-			if (other.currentRoom != null)
+		if (room == null) {
+			if (other.room != null)
 				return false;
-		} else if (!currentRoom.equals(other.currentRoom))
+		} else if (!room.equals(other.room))
 			return false;
 		if (x != other.x)
 			return false;

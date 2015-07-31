@@ -30,8 +30,14 @@ public class TextClient {
 
 	private void getMove(int diceRoll, Player player){
 		System.out.println("You Rolled a : " + diceRoll);
-		//System.out.println("You")
-		//Room[] reachableRooms = goc.reachableRooms();
+		Position pos = goc.getPlayerPos();
+		if(pos.inRoom()){
+			System.out.println("You are in room " + pos.getRoom().getName());
+		}else{
+			System.out.println("You are at this point " + pos.getX() +","+ pos.getY());
+		}
+		System.out.println("1. Enter Co-ordinate or name of room");
+
 
 	}
 

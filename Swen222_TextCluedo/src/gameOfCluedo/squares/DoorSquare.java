@@ -10,4 +10,7 @@ public class DoorSquare implements Square {
 		this.to = to;
 	}
 
+	public Room to(){
+		return to;
+	}
 }

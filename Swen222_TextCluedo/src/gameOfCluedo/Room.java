@@ -1,13 +1,17 @@
 package gameOfCluedo;
 
+import java.util.List;
+
 public class Room {
 	private String name;
 	private Room passage;
+	private List<Position> entrances;
 
-	public Room(String name, Room passage) {
+	public Room(String name, Room passage, List<Position> entrances) {
 		super();
 		this.name = name;
 		this.passage = passage;
+		this.entrances = entrances;
 	}
 
 	public String getName() {
@@ -16,6 +20,14 @@ public class Room {
 
 	public Room getPassage() {
 		return passage;
+	}
+
+	public void addEntrance(Position entrance){
+		entrances.add(entrance);
+	}
+
+	public List<Position> getEntrances() {
+		return entrances;
 	}
 
 	/**
@@ -30,4 +42,11 @@ public class Room {
 		}
 		return false;
 	}
+
+	@Override
+	public String toString() {
+		return name;
+	}
+
+
 }

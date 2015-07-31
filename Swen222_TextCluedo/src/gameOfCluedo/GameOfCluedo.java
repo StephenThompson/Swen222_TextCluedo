@@ -62,7 +62,9 @@ public class GameOfCluedo {
 				System.out.println("What we looping for too many players : " + i);
 			}else{
 				System.out.println("Character : " + i);
-				players.add(new Player(Player.Character.values()[i]));
+				Player newPlayer = new Player(Player.Character.values()[i]);
+				players.add(newPlayer);
+				board.addPlayers(newPlayer);
 			}
 		}
 
@@ -124,6 +126,13 @@ public class GameOfCluedo {
 	/*public Room[] getReachableRooms(int diceRoll){
 		board.
 	}*/
+
+	/**
+	 * Returns current players position
+	 */
+	public Position getPlayerPos(){
+		return board.getPlayerPosition(currentPlayer);
+	}
 
 	/**
 	 * Return currentPlayer

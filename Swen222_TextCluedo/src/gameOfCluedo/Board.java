@@ -61,10 +61,41 @@ public class Board {
 		}catch(IOException e){
 			System.out.println("Error loading board - " + e.getMessage());
 		}
+		setupEntrances();
 	}
+	/**
+	 * Adds player to map at their starting location
+	 * @param player
+	 */
 	public void addPlayers(Player player){
-		//startingPositions[player.][0];
-		playerPos.put(player, new Position((int)(Math.random()*xSize), (int)(Math.random()*ySize)));
+		Position pos = new Position(startingPositions[player.getName().ordinal()][0], startingPositions[player.getName().ordinal()][1]);
+		playerPos.put(player, pos);
+	}
+
+	/**
+	 * Returns player position on the board. (null if player not found)
+	 * @param p
+	 * @return
+	 */
+	public Position getPlayerPosition(Player p){
+		if(playerPos.get(p)!=null){
+			return playerPos.get(p);
+		}else{
+			return null;
+		}
+	}
+
+	public List<Room> reachableRooms(int diceRoll, Position startingPos){
+		List<Room> reachable = new ArrayList<Room>();
+		if(startingPos.inRoom()){
+			if(startingPos.getRoom().getPassage()!=null){
+				reachable.add(startingPos.getRoom().getPassage());
+			}
+			for(Position p: startingPos.getRoom().getEntrances()){
+
+			}
+		}
+		return null;
 	}
 
 	/*public boolean validMove(Player p, ){
@@ -77,7 +108,7 @@ public class Board {
 	private void createRooms(){
 		//Creates rooms
 		for(int i = 0; i<roomTitles.length; i++){
-			rooms.add(new Room(roomTitles[i], null));
+			rooms.add(new Room(roomTitles[i], null, new ArrayList<Position>()));
 		}
 		//Create passages
 		//Kitchen->Study
@@ -88,6 +119,17 @@ public class Board {
 		rooms.get(2).setPassage(rooms.get(6));
 		//Lounge->Conservatory
 		rooms.get(6).setPassage(rooms.get(2));
+	}
+
+	private void setupEntrances(){
+		//Setup entrances
+		for(int x = 0; x<board.length; x++){
+			for(int y = 0; y<board[0].length; y++){
+				if(board[x][y] instanceof DoorSquare){
+					((DoorSquare)board[x][y]).to().addEntrance(new Position(x,y));;
+				}
+			}
+		}
 	}
 
 	public void draw(){
