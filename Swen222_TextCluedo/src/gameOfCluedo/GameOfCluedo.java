@@ -60,7 +60,7 @@ public class GameOfCluedo {
 		players = new ArrayList<Player>();
 
 		for (int i = 0; i < numPlayers; i++){
-			players.add(new Player());
+			players.add(new Player(Player.Character.Colonel_Mustard));
 		}
 		currentPlayer = players.get(0);
 		envelope = deck.deal(players);
@@ -106,9 +106,9 @@ public class GameOfCluedo {
 	 * @param diceRoll
 	 * @return
 	 */
-	/*public Room[] getReachableRooms(int diceRoll){
-
-	}*/
+	public Room[] getReachableRooms(int diceRoll){
+		return null;
+	}
 
 	/**
 	 * Return currentPlayer
