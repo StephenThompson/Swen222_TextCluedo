@@ -96,7 +96,7 @@ public class Board {
 	}
 
 	/**
-	 * Finds reachabel rooms from a position
+	 * Finds reachable rooms from a position
 	 * @param diceRoll
 	 * @param startingPos
 	 * @return
@@ -126,7 +126,14 @@ public class Board {
 		return null;
 	}
 
-	/*public boolean validMove(Player p, ){
+	/**
+	 * Recursive flood algorithm to find valid move or not.
+	 * @param p
+	 * @param newPos
+	 * @param diceRoll
+	 * @return
+	 */
+	/*public boolean validMove(Player p, Position newPos, int diceRoll){
 
 	}*/
 

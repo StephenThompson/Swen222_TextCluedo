@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import gameOfCluedo.*;
+import gameOfCluedo.cards.*;
 
 public class TextClient {
 	private GameOfCluedo goc;
@@ -57,8 +58,29 @@ public class TextClient {
 		}
 	}
 
-	private GuessTuple getSuggest(){
-		return null;
+	private void getSuggest(){
+		String charList[] = {"Miss Scarlett", "Colonel Mustard", "Mrs. White", "The Reverend Green",
+				"Mrs. Peacock", "Professor Plum"};
+		System.out.println("- Guess");
+		System.out.println("Choose your character");
+		for (int i = 0; i < charList.length; i++){
+		System.out.println((i+1) + ". " + charList[i]);
+		}
+		int charChoice = readInt(": ") - 1;
+
+
+		CharCard character = new CharCard(charList[charChoice]);
+		WeaponCard weapon = new WeaponCard("Candlestick");
+		RoomCard room = new RoomCard("Kitchen");
+
+		GuessTuple guess = new GuessTuple(character, weapon, room);
+		Card back = goc.guess(guess);
+		if (back != null){
+		System.out.println("The next player card is \"" + back.getTitle() + "\"");
+		} else {
+		System.out.println("The next player cannot disprove your guess");
+		}
+		System.out.println("The next player cannot disprove your guess");
 	}
 
 	private GuessTuple getAccuse(){
