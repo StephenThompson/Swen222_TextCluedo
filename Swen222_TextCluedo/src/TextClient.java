@@ -16,8 +16,8 @@ public class TextClient {
 	}
 
 	private playerOption playerTurn(Player p){
-		System.out.println("\n" + p.getName().name() + "'s turn!\n");
 		goc.drawBoard();
+		System.out.println("\n" + p.getName().name() + "'s turn!\n");
 		System.out.println("\n-- Make a choice --");
 		System.out.println("1\tMove");
 		System.out.println("2\tSuggest");

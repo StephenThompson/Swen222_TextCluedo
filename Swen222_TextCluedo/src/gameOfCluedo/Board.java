@@ -162,7 +162,7 @@ public class Board {
 			PosInfo posInfo = nextPos.poll();
 			if(!validMoves.contains(posInfo.pos)){
 				validMoves.add(posInfo.pos);
-				if(posInfo.movesLeft>0){
+				if(posInfo.movesLeft>0&&!posInfo.pos.isRoom()){
 					for(Position neighbour : getSurroundingPositions(posInfo.pos)){
 						nextPos.add(new PosInfo(neighbour, posInfo.movesLeft-1));
 					}
@@ -251,7 +251,7 @@ public class Board {
 			System.out.print(" " + (char)(x+65));
 		}
 		System.out.println();
-		char[] CharacterToken = {'S', 'M', 'W', 'G', 'E', 'P'}; 
+		char[] CharacterToken = {'S', 'M', 'W', 'G', 'E', 'P'};
 		String[] boardASCII = {
 				   "┌──────────┬─────┘ ░│      │ ░└───┐ ┌────────────┐",
 				   "│▒         │ ░ ░ ░ ░│      │ ░ ░ ░└─┤           ▒│",
