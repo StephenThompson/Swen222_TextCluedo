@@ -155,13 +155,9 @@ public class GameOfCluedo {
 		return currentPlayer;
 	}
 
-	public boolean validMove(Position newPos){
-		//TODO check if can make it to pos
-		if(newPos.isRoom()){
-			return true;
-		}
-		if(newPos.getX()>=0 && newPos.getY()>=0 && newPos.getX()<board.xSize && newPos.getY()<board.ySize){
-			return true;
+	public boolean validMove(Position newPos, int diceRoll){
+		if(newPos.isRoom()||(newPos.getX()>=0 && newPos.getY()>=0 && newPos.getX()<board.xSize && newPos.getY()<board.ySize)){
+			return board.validMove(currentPlayer, newPos, diceRoll);
 		}
 		return false;
 	}

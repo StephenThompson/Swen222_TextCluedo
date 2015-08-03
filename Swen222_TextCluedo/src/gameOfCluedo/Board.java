@@ -106,17 +106,18 @@ public class Board {
 	 * @return
 	 */
 	public List<Room> reachableRooms(int diceRoll, Position startingPos){
-		return rooms;
-		/*List<Room> reachable = new ArrayList<Room>();
-		if(startingPos.inRoom()){
+		List<Room> reachable = new ArrayList<Room>();
+		if(startingPos.isRoom()){
 			if(startingPos.getRoom().getPassage()!=null){
 				reachable.add(startingPos.getRoom().getPassage());
 			}
-			for(Position p: startingPos.getRoom().getEntrances()){
-
+		}
+		for(Position p : getValidMoves(startingPos, diceRoll)){
+			if(p.isRoom()){
+				reachable.add(p.getRoom());
 			}
 		}
-		return null;*/
+		return reachable;
 	}
 
 	/**

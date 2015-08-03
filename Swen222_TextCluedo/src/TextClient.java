@@ -45,7 +45,7 @@ public class TextClient {
 			System.out.printf("%2d. %s%n", i + 1, reachable.get(i).toString());
 		}
 		System.out.println("1. Enter X-Coordinate or name of room");
-		
+
 		Position newPos = null;
 		if(inScanner.hasNext("[a-zA-Z]")){
 			int x = (Character.toUpperCase(readChar(""))) - 65;
@@ -59,7 +59,7 @@ public class TextClient {
 				}
 			}
 		}
-		if(newPos!=null && goc.validMove(newPos)){
+		if(newPos!=null && goc.validMove(newPos, diceRoll)){
 			goc.move(newPos);
 		}
 	}
@@ -179,7 +179,7 @@ public class TextClient {
 					getAccuse();
 					break;
 			}
-			goc.endTurn();
+			//goc.endTurn();
 		}
 		//End game
 	}
