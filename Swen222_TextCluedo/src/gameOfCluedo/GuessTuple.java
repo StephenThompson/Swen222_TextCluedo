@@ -61,7 +61,7 @@ public class GuessTuple {
 		}
 		if (o instanceof GuessTuple){
 			GuessTuple t = (GuessTuple)o;
-			return character == t.character && weapon == t.weapon && room == t.room;
+			return character.equals(t.character) && weapon.equals(t.weapon) && room.equals(t.room);
 		}
 		return false;
 	}

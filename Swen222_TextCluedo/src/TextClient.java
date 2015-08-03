@@ -16,8 +16,9 @@ public class TextClient {
 	}
 
 	private playerOption playerTurn(Player p){
-		System.out.println(p.getName().name() + "'s turn!");
-		System.out.println("-- Make a choice --");
+		System.out.println("\n" + p.getName().name() + "'s turn!\n");
+		goc.drawBoard();
+		System.out.println("\n-- Make a choice --");
 		System.out.println("1\tMove");
 		System.out.println("2\tSuggest");
 		System.out.println("3\tAccuse");
@@ -61,30 +62,81 @@ public class TextClient {
 	private void getSuggest(){
 		String charList[] = {"Miss Scarlett", "Colonel Mustard", "Mrs. White", "The Reverend Green",
 				"Mrs. Peacock", "Professor Plum"};
+
+		String weaponList[] = {"Candlestick", "Dagger", "Lead Pipe", "Revolver",
+				"Rope", "Spanner"};
+
 		System.out.println("- Guess");
+		// Character
 		System.out.println("Choose your character");
 		for (int i = 0; i < charList.length; i++){
 		System.out.println((i+1) + ". " + charList[i]);
 		}
 		int charChoice = readInt(": ") - 1;
 
+		// Weapon
+		System.out.println("Choose your weapon");
+		for (int i = 0; i < weaponList.length; i++){
+		System.out.println((i+1) + ". " + weaponList[i]);
+		}
+		int weaponChoice = readInt(": ") - 1;
 
 		CharCard character = new CharCard(charList[charChoice]);
-		WeaponCard weapon = new WeaponCard("Candlestick");
+		WeaponCard weapon = new WeaponCard(weaponList[weaponChoice]);
 		RoomCard room = new RoomCard("Kitchen");
 
 		GuessTuple guess = new GuessTuple(character, weapon, room);
 		Card back = goc.guess(guess);
 		if (back != null){
-		System.out.println("The next player card is \"" + back.getTitle() + "\"");
+			System.out.println("The next player card is \"" + back.getTitle() + "\"");
 		} else {
-		System.out.println("The next player cannot disprove your guess");
+			System.out.println("The next player cannot disprove your guess");
 		}
-		System.out.println("The next player cannot disprove your guess");
 	}
 
-	private GuessTuple getAccuse(){
-		return null;
+	private void getAccuse(){
+		String charList[] = {"Miss Scarlett", "Colonel Mustard", "Mrs. White", "The Reverend Green",
+				"Mrs. Peacock", "Professor Plum"};
+
+		String weaponList[] = {"Candlestick", "Dagger", "Lead Pipe", "Revolver",
+				"Rope", "Spanner"};
+
+		String roomList[] = {"Kitchen", "Ball Room", "Conservatory", "Dining Room",
+				"Billard Room", "Library",  "Lounge",  "Hall",  "Study"};
+
+		System.out.println("- Accuse");
+
+		// Character
+		System.out.println("Choose your character");
+		for (int i = 0; i < charList.length; i++){
+		System.out.println((i+1) + ". " + charList[i]);
+		}
+		int charChoice = readInt(": ") - 1;
+
+		// Weapon
+		System.out.println("Choose your weapon");
+		for (int i = 0; i < weaponList.length; i++){
+		System.out.println((i+1) + ". " + weaponList[i]);
+		}
+		int weaponChoice = readInt(": ") - 1;
+
+		// Room
+		System.out.println("Choose your room");
+		for (int i = 0; i < roomList.length; i++){
+		System.out.println((i+1) + ". " + roomList[i]);
+		}
+		int roomChoice = readInt(": ") - 1;
+
+		CharCard character = new CharCard(charList[charChoice]);
+		WeaponCard weapon = new WeaponCard(weaponList[weaponChoice]);
+		RoomCard room = new RoomCard(roomList[roomChoice]);
+
+		GuessTuple guess = new GuessTuple(character, weapon, room);
+		if (goc.accuse(guess)){
+			System.out.println("You win");
+		} else {
+			System.out.println("You lost");
+		}
 	}
 
 	private void gameLoop(){

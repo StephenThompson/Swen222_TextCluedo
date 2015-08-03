@@ -40,6 +40,11 @@ public class Deck {
 		fullDeck.addAll(weapons);
 		fullDeck.addAll(rooms);
 
+		//Remove envelope
+		fullDeck.remove(envChar);
+		fullDeck.remove(envWeapon);
+		fullDeck.remove(envRoom);
+
 		//Deals out all cards to players hands
 		while(!fullDeck.isEmpty()){
 			//Deals a card to each player

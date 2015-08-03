@@ -167,13 +167,50 @@ public class Board {
 		}
 		System.out.println();
 
+		String boardASCII[] = {
+				   "┌──────────┬─────┘ ░│      │ ░└───┐ ┌────────────┐",
+				   "│▒         │ ░ ░ ░ ░│      │ ░ ░ ░└─┤           ▒│",
+				   "│          │ ░ ░┌───┘      └───┐ ░ ░│Conservatory│",
+				   "│  Kitchen │ ░ ░│              │ ░ ░│            │",
+				   "│          │ ░ ░│   Ball Room  │ ░ ░└↑┐       ┌──┘",
+				   "│          │ ░ ░→              ← ░ ░ ░└───────┴──┐",
+				   "└───────↑↑─┘ ░ ░│              │ ░ ░ ░ ░ ░ ░ ░ ░ │",
+				   " ░ ░ ░ ░ ░ ░ ░ ░└─↑↑────────↑↑─┘ ░ ░ ░ ░ ░ ░ ░┌──┘",
+				   "─┐ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░┌─────────┴──┐",
+				   "┌┴───────┐ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░→  Billard   │",
+				   "│        └─────┐ ░ ░┌────────┐ ░ ░ ░│    Room    │",
+				   "│              │ ░ ░│        │ ░ ░ ░│            │",
+				   "│ Dining Room  ← ░ ░│        │ ░ ░ ░└───────↑↑┬──┘",
+				   "│              │ ░ ░│ Cluedo │ ░ ░ ░ ░ ░ ░ ░ ░│   ",
+				   "│              │ ░ ░│        │ ░ ░ ░┌───↓↓────┴──┐",
+				   "└┬──────────↑↑─┘ ░ ░│        │ ░ ░┌─┘            │",
+				   "─┘ ░ ░ ░ ░ ░ ░ ░ ░ ░└────────┘ ░ ░→    Library   │",
+				   " ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░ ░└─┐            │",
+				   "─┐ ░ ░ ░ ░ ░ ░ ░ ░┌───↓↓↓↓───┐ ░ ░ ░└────────────┤",
+				   "┌┴──────────↓┐ ░ ░│          │ ░ ░ ░ ░ ░ ░ ░ ░ ░ │",
+				   "│            │ ░ ░│          ← ░ ░ ░ ░ ░ ░ ░ ░┌──┘",
+				   "│   Lounge   │ ░ ░│   Hall   │ ░ ░┌↓──────────┴──┐",
+				   "│            │ ░ ░│          │ ░ ░│    Study     │",
+				   "│▒           │ ░ ░│          │ ░ ░│             ▒│",
+				   "└────────────┘ ░┌─┴──────────┴─┐ ░└──────────────┘"};
+
 		for (int y=0; y < board[0].length; y++){
+
 			System.out.printf("%2d ", y);
 			for(int x =0; x<board.length; x++){
 				if (playerPos.containsValue(new Position(x,y))){
 					System.out.print(" P");
 				} else {
-					if(board[x][y] instanceof BlankSquare){
+					System.out.print(boardASCII[y].substring(x*2, x*2+2));
+				}
+			}
+			System.out.println();
+		}
+	}
+
+/*
+ *
+					/*if(board[x][y] instanceof BlankSquare){
 						//System.out.print("▗▚");
 						System.out.print(" ░");
 					}else if(board[x][y] instanceof RoomSquare){
@@ -188,12 +225,6 @@ public class Board {
 							System.out.print("↑↑");
 						else if (board[x+1][y] instanceof RoomSquare)
 							System.out.print(" →");
-					}
-				}
-			}
-			System.out.println();
-		}
-	}
-
+					}*/
 
 }

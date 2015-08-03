@@ -58,26 +58,13 @@ public class GameOfCluedo {
 		// Setup game
 		players = new ArrayList<Player>();
 		for(int i=0; i<numPlayers; i++){
-			if(i>=Player.Character.values().length){
-				System.out.println("What we looping for too many players : " + i);
-			}else{
-				System.out.println("Character : " + i);
-				Player newPlayer = new Player(Player.Character.values()[i]);
-				players.add(newPlayer);
-				board.addPlayers(newPlayer);
-			}
+			Player newPlayer = new Player(Player.Character.values()[i]);
+			players.add(newPlayer);
 		}
 
 		deck = new Deck(charCards, weaponCards, roomCards);
 		currentPlayer = players.get(0);
 		envelope = deck.deal(players);
-
-
-
-		System.out.println("Character : " + envelope.getCharacter().getTitle());
-		System.out.println("Weapon    : " + envelope.getWeapon().getTitle());
-		System.out.println("Room      : " + envelope.getRoom().getTitle());
-
 	}
 
 	/**
@@ -98,7 +85,22 @@ public class GameOfCluedo {
 	 * @return Card
 	 */
 	public Card guess(GuessTuple guess){
-		return nextPlayer().checkGuess(guess);
+		int i = players.indexOf(currentPlayer) + 1;
+		if (i >= players.size()){
+			i = 0;
+		}
+
+		while (players.indexOf(currentPlayer) != i){
+			Card c = players.get(i).checkGuess(guess);
+			if (c != null){
+				return c;
+			}
+			i++;
+			if (i >= players.size()){
+				i = 0;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -107,7 +109,15 @@ public class GameOfCluedo {
 	 * @return boolean
 	 */
 	public boolean accuse(GuessTuple guess){
-		return guess.equals(envelope);
+		if (guess.equals(envelope)){
+			Player c = currentPlayer;
+			eliminated = new ArrayList<Player>(players);
+			eliminated.remove(c);
+			players.clear();
+			players.add(c);
+			return true;
+		}
+		return false;
 	}
 
 
@@ -156,15 +166,32 @@ public class GameOfCluedo {
 	}
 
 	/**
-	 * Sets current player to the next player and return said player
-	 * @return
+	 * Moves the turn to the next player
 	 */
-	public Player nextPlayer(){
+	public void endTurn(){
 		if(players.indexOf(currentPlayer)<players.size()-1){
 			currentPlayer = players.get(players.indexOf(currentPlayer)+1);
 		}else{
 			currentPlayer = players.get(0);
 		}
-		return currentPlayer;
+	}
+
+	/**
+	 * Gets the next player
+	 * @return
+	 */
+	public Player nextPlayer(){
+		if(players.indexOf(currentPlayer)<players.size()-1){
+			return players.get(players.indexOf(currentPlayer)+1);
+		}else{
+			return players.get(0);
+		}
+	}
+
+	/**
+	 * Draws the board
+	 */
+	public void drawBoard(){
+		board.draw();
 	}
 }

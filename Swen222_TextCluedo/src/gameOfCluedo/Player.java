@@ -22,6 +22,9 @@ public class Player {
 	}
 
 	public Card checkGuess(GuessTuple guess){
+		long seed = System.nanoTime();
+		Collections.shuffle(hand, new Random(seed));
+
 		for (Card c : hand){
 			if (c instanceof CharCard){
 				if (c.equals(guess.getCharacter())){
