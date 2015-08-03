@@ -51,13 +51,15 @@ public class TextClient {
 			int x = (Character.toUpperCase(readChar(""))) - 65;
 			int y = readInt("Enter Y-coordinate") - 1;
 			newPos = new Position(x,y);
-		}else{
+		}else if (inScanner.hasNextInt()){
 			int roomIndex = readInt("") - 1;
 			for(Room r : reachable){
 				if (r.getName().equals(reachable.get(roomIndex).toString())){
 					newPos = new Position(r);
 				}
 			}
+		}else{
+			System.out.println("InvalidMove");
 		}
 		if(newPos!=null && goc.validMove(newPos, diceRoll)){
 			goc.move(newPos);
