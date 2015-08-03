@@ -17,7 +17,7 @@ public class Position {
 		this.room = room;
 	}
 
-	public boolean inRoom(){
+	public boolean isRoom(){
 		if(room!=null){
 			return true;
 		}
@@ -39,7 +39,7 @@ public class Position {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		if(inRoom()){
+		if(isRoom()){
 			return room.hashCode() * prime;
 		}else{
 			return x + y * prime;
@@ -56,8 +56,8 @@ public class Position {
 			return false;
 		Position other = (Position) obj;
 		//if not room vs room
-		if (!inRoom()) {
-			if (other.inRoom())
+		if (!isRoom()) {
+			if (other.isRoom())
 				return false;
 		//both are rooms with same room
 		} else if (room.equals(other.getRoom()))

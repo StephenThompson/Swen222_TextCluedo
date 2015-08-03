@@ -34,10 +34,10 @@ public class TextClient {
 	private void getMove(int diceRoll, Player player){
 		System.out.println("You Rolled a : " + diceRoll);
 		Position originalPos = goc.getPlayerPos();
-		if(originalPos.inRoom()){
+		if(originalPos.isRoom()){
 			System.out.println("You are in room " + originalPos.getRoom().getName());
 		}else{
-			System.out.println("You are at this point " + originalPos.getX() +","+ originalPos.getY());
+			System.out.println("You are at this point " + (char)(originalPos.getX()+65) +","+ originalPos.getY());
 		}
 		System.out.println("1. Enter X-Coordinate or name of room");
 		List<Room> reachable = goc.getReachableRooms(diceRoll);
@@ -50,8 +50,9 @@ public class TextClient {
 		}else{
 			String input = inScanner.nextLine();
 			for(Room r : reachable){
-				r.getName().equals(input);
-				newPos = new Position(r);
+				//if (r.getName().equals(input)){
+					newPos = new Position(r);
+				//}
 			}
 		}
 		if(newPos!=null && goc.validMove(newPos)){

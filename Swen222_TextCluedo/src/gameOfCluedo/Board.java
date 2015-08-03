@@ -92,7 +92,7 @@ public class Board {
 	public void setPlayerPosition(Player player, Position pos){
 		if(!playerPos.containsKey(player)){return;}
 		playerPos.put(player, pos);
-		if(!pos.inRoom()){
+		if(!pos.isRoom()){
 			System.out.println(player.getName() + "is now at" + pos.getX() + "," + pos.getY());
 		}else{
 			System.out.println(player.getName() + " is now in " + pos.getRoom());
@@ -190,7 +190,7 @@ public class Board {
 	 * @return
 	 */
 	private List<Position> getSurroundingPositions(Position pos){
-		if(pos.inRoom()){
+		if(pos.isRoom()){
 			return pos.getRoom().getEntrances();
 		}
 		List<Position> adjPos = new ArrayList<Position>();
@@ -281,7 +281,7 @@ public class Board {
 			System.out.printf("%2d ", y);
 			for(int x =0; x<board.length; x++){
 				if (playerPos.containsValue(new Position(x,y))){
-					System.out.print(" P");
+					System.out.print(" ©");
 				} else {
 					System.out.print(boardASCII[y].substring(x*2, x*2+2));
 				}

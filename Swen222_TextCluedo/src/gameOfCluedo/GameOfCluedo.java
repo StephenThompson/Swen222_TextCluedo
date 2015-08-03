@@ -60,6 +60,7 @@ public class GameOfCluedo {
 		for(int i=0; i<numPlayers; i++){
 			Player newPlayer = new Player(Player.Character.values()[i]);
 			players.add(newPlayer);
+			board.addPlayers(newPlayer);
 		}
 
 		deck = new Deck(charCards, weaponCards, roomCards);
@@ -156,7 +157,7 @@ public class GameOfCluedo {
 
 	public boolean validMove(Position newPos){
 		//TODO check if can make it to pos
-		if(newPos.inRoom()){
+		if(newPos.isRoom()){
 			return true;
 		}
 		if(newPos.getX()>=0 && newPos.getY()>=0 && newPos.getX()<board.xSize && newPos.getY()<board.ySize){
