@@ -2,11 +2,15 @@ package gameOfCluedo;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.List;
+import java.util.Queue;
 import java.util.Scanner;
+import java.util.Set;
 
 import gameOfCluedo.squares.*;
 
@@ -129,13 +133,84 @@ public class Board {
 	/**
 	 * Recursive flood algorithm to find valid move or not.
 	 * @param p
-	 * @param newPos
+	 * @param target
 	 * @param diceRoll
 	 * @return
 	 */
-	/*public boolean validMove(Player p, Position newPos, int diceRoll){
+	public boolean validMove(Player p, Position target, int diceRoll){
+		Position orgPos = getPlayerPosition(p);
+		return getValidMoves(orgPos, diceRoll).contains(target);
+	}
 
-	}*/
+	public boolean validMove(Position pos, Position target, int diceRoll){
+		return getValidMoves(pos, diceRoll).contains(target);
+	}
+
+	/**
+	 * Returns set of valid moves from position with dice roll
+	 * @param pos
+	 * @param movesLeft
+	 * @param visited
+	 * @return
+	 */
+	public Set<Position> getValidMoves(Position pos,  int diceRoll){
+		Set<Position> validMoves = new HashSet<Position>();
+		Queue<PosInfo> nextPos = new ArrayDeque<PosInfo>();
+		nextPos.add(new PosInfo(pos, diceRoll));
+		while(!nextPos.isEmpty()){
+			PosInfo posInfo = nextPos.poll();
+			if(!validMoves.contains(posInfo.pos)){
+				validMoves.add(posInfo.pos);
+				for(Position neighbour : getSurroundingPositions(posInfo.pos)){
+					nextPos.add(new PosInfo(neighbour, diceRoll-1));
+				}
+			}
+		}
+		return validMoves;
+	}
+
+	/**
+	 * Usd for iterative flood on positions of board
+	 * @author gillcall1
+	 *
+	 */
+	private class PosInfo{
+		int movesLeft;
+		Position pos;
+
+		public PosInfo(Position pos, int movesLeft){
+			this.pos=pos;
+			this.movesLeft = movesLeft;
+		}
+	}
+
+	/**
+	 * Gets surrounding positions including rooms
+	 * @param pos
+	 * @return
+	 */
+	private List<Position> getSurroundingPositions(Position pos){
+		if(pos.inRoom()){
+			return pos.getRoom().getEntrances();
+		}
+		List<Position> adjPos = new ArrayList<Position>();
+		int x = pos.getX();
+		int y = pos.getY();
+		int[] xCoords = new int[]{x+1,x,x-1,x};
+		int[] yCoords = new int[]{y,y+1,y,y-1};
+		//Checks adjTiles
+		for(int i = 0; i<xCoords.length; i++){
+			if(xCoords[i]<0||xCoords[i]>=board.length||yCoords[i]<0||yCoords[i]>=board[0].length){
+				System.out.println("Out of bounds");
+			}else if(!(board[xCoords[i]][yCoords[i]] instanceof RoomSquare)){
+				adjPos.add(new Position(xCoords[i],yCoords[i]));
+			}
+		}
+		if(board[x][y] instanceof DoorSquare){
+			adjPos.add(new Position(((DoorSquare)board[x][y]).to()));
+		}
+		return adjPos;
+	}
 
 	/**
 	 * Creates the rooms and passages between them
