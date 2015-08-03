@@ -200,10 +200,10 @@ public class Board {
 		int[] yCoords = new int[]{y,y+1,y,y-1};
 		//Checks adjTiles
 		for(int i = 0; i<xCoords.length; i++){
-			if(xCoords[i]<0||xCoords[i]>=board.length||yCoords[i]<0||yCoords[i]>=board[0].length){
-				System.out.println("Out of bounds");
-			}else if(!(board[xCoords[i]][yCoords[i]] instanceof RoomSquare)){
-				adjPos.add(new Position(xCoords[i],yCoords[i]));
+			if(!(xCoords[i]<0||xCoords[i]>=board.length||yCoords[i]<0||yCoords[i]>=board[0].length)){
+				if(!(board[xCoords[i]][yCoords[i]] instanceof RoomSquare)){
+					adjPos.add(new Position(xCoords[i],yCoords[i]));
+				}
 			}
 		}
 		if(board[x][y] instanceof DoorSquare){
