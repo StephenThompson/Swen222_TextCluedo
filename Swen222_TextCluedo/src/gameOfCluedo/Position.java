@@ -39,12 +39,11 @@ public class Position {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((room == null) ? 0 : room.hashCode());
-		result = prime * result + x;
-		result = prime * result + y;
-		return result;
+		if(inRoom()){
+			return room.hashCode() * prime;
+		}else{
+			return x + y * prime;
+		}
 	}
 
 	@Override
@@ -56,14 +55,17 @@ public class Position {
 		if (getClass() != obj.getClass())
 			return false;
 		Position other = (Position) obj;
-		if (room == null) {
-			if (other.room != null)
+		//if not room vs room
+		if (!inRoom()) {
+			if (other.inRoom())
 				return false;
-		} else if (!room.equals(other.room))
+		//both are rooms with same room
+		} else if (room.equals(other.getRoom()))
+			return true;
+		//is normal co-ordinate check if at same points
+		if (x != other.getX())
 			return false;
-		if (x != other.x)
-			return false;
-		if (y != other.y)
+		if (y != other.getY())
 			return false;
 		return true;
 	}

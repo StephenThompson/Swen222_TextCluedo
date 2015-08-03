@@ -48,5 +48,21 @@ public class Room {
 		return name;
 	}
 
+	@Override
+	public int hashCode() {
+		return name.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Room){
+			Room other = (Room)obj;
+			if(name.equals(other.getName())){
+				return true;
+			}
+		}
+		return false;
+	}
+
 
 }
