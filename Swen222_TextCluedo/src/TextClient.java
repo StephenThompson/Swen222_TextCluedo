@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Scanner;
 
 import gameOfCluedo.*;
@@ -30,15 +31,30 @@ public class TextClient {
 
 	private void getMove(int diceRoll, Player player){
 		System.out.println("You Rolled a : " + diceRoll);
-		Position pos = goc.getPlayerPos();
-		if(pos.inRoom()){
-			System.out.println("You are in room " + pos.getRoom().getName());
+		Position originalPos = goc.getPlayerPos();
+		if(originalPos.inRoom()){
+			System.out.println("You are in room " + originalPos.getRoom().getName());
 		}else{
-			System.out.println("You are at this point " + pos.getX() +","+ pos.getY());
+			System.out.println("You are at this point " + originalPos.getX() +","+ originalPos.getY());
 		}
-		System.out.println("1. Enter Co-ordinate or name of room");
-
-
+		System.out.println("1. Enter X-Coordinate or name of room");
+		List<Room> reachable = goc.getReachableRooms(diceRoll);
+		System.out.println("You can reach these rooms : " + reachable.toString());
+		Position newPos = null;
+		if(inScanner.hasNextInt()){
+			int x = readInt("");
+			int y = readInt("Enter Y-coordinate");
+			newPos = new Position(x,y);
+		}else{
+			String input = inScanner.nextLine();
+			for(Room r : reachable){
+				r.getName().equals(input);
+				newPos = new Position(r);
+			}
+		}
+		if(newPos!=null && goc.validMove(newPos)){
+			goc.move(newPos);
+		}
 	}
 
 	private GuessTuple getSuggest(){

@@ -86,8 +86,10 @@ public class GameOfCluedo {
 	 * @param y
 	 * @return
 	 */
-	public boolean move(int x, int y){
-		return false;
+	public boolean move(Position pos){
+		if(pos==null){return false;}
+		board.setPlayerPosition(currentPlayer, pos);
+		return true;
 	}
 
 	/**
@@ -123,9 +125,9 @@ public class GameOfCluedo {
 	 * @param diceRoll
 	 * @return
 	 */
-	/*public Room[] getReachableRooms(int diceRoll){
-		board.
-	}*/
+	public List<Room> getReachableRooms(int diceRoll){
+		return board.reachableRooms(diceRoll, getPlayerPos());
+	}
 
 	/**
 	 * Returns current players position
@@ -142,6 +144,16 @@ public class GameOfCluedo {
 		return currentPlayer;
 	}
 
+	public boolean validMove(Position newPos){
+		//TODO check if can make it to pos
+		if(newPos.inRoom()){
+			return true;
+		}
+		if(newPos.getX()>=0 && newPos.getY()>=0 && newPos.getX()<board.xSize && newPos.getY()<board.ySize){
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Sets current player to the next player and return said player

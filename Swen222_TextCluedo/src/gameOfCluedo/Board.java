@@ -85,8 +85,25 @@ public class Board {
 		}
 	}
 
+	public void setPlayerPosition(Player player, Position pos){
+		if(!playerPos.containsKey(player)){return;}
+		playerPos.put(player, pos);
+		if(!pos.inRoom()){
+			System.out.println(player.getName() + "is now at" + pos.getX() + "," + pos.getY());
+		}else{
+			System.out.println(player.getName() + " is now in " + pos.getRoom());
+		}
+	}
+
+	/**
+	 * Finds reachabel rooms from a position
+	 * @param diceRoll
+	 * @param startingPos
+	 * @return
+	 */
 	public List<Room> reachableRooms(int diceRoll, Position startingPos){
-		List<Room> reachable = new ArrayList<Room>();
+		return rooms;
+		/*List<Room> reachable = new ArrayList<Room>();
 		if(startingPos.inRoom()){
 			if(startingPos.getRoom().getPassage()!=null){
 				reachable.add(startingPos.getRoom().getPassage());
@@ -95,6 +112,17 @@ public class Board {
 
 			}
 		}
+		return null;*/
+	}
+
+	/**
+	 * Finds reachable rooms from an x,y coordinate
+	 * @param diceRoll
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	public List<Room> reachableRooms(int diceRoll, int x, int y){
 		return null;
 	}
 
