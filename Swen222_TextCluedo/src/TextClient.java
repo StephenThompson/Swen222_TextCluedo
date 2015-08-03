@@ -11,24 +11,30 @@ public class TextClient {
 	private GameOfCluedo goc;
 	private Scanner inScanner = new Scanner(System.in);
 
-	private enum playerOption{
+	private enum PlayerOption{
 		MOVE, SUGGEST, ACCUSE
 	}
 
-	private playerOption playerTurn(Player p){
+	private PlayerOption playerTurn(Player p){
+		//Draw Board
 		goc.drawBoard();
+		PlayerOption[] inRoomOptions = {PlayerOption.MOVE, PlayerOption.SUGGEST, PlayerOption.ACCUSE};
+		PlayerOption[] options = {PlayerOption.MOVE, PlayerOption.ACCUSE};
+		if(goc.getPlayerPos().isRoom()){
+			options = inRoomOptions;
+		}
 		System.out.println("\n" + p.getName().name() + "'s turn!\n");
 		System.out.println("\n-- Make a choice --");
-		System.out.println("1\tMove");
-		System.out.println("2\tSuggest");
-		System.out.println("3\tAccuse");
+		for(int i=0; i<options.length; i++){
+			System.out.println(i+1 + "\t"+options[i].name());
+		}
 
 		int selected = readInt("Choice : ");
 		while(selected<1||selected>3){
 			System.out.println("Invalid choice");
 			selected = readInt("Choice : ");
 		}
-		return playerOption.values()[selected-1];
+		return options[selected-1];
 	}
 
 	private void getMove(int diceRoll, Player player){
@@ -168,7 +174,7 @@ public class TextClient {
 		while (!goc.checkGameOver()){
 		//	Ask player option
 			Player currentPlayer = goc.getCurrentPlayer();
-			playerOption opt = playerTurn(currentPlayer);
+			PlayerOption opt = playerTurn(currentPlayer);
 		//	Respond to player's choice
 			switch (opt){
 				case MOVE:
