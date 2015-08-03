@@ -47,6 +47,15 @@ public class Test_validMoves {
 	}
 
 	@Test
+	public void invalid_move_2(){
+		Board board = new Board("");
+		Position pos = new Position(9, 0);
+		Position target = new Position(9,3);
+		int roll = 6;
+		assertFalse(checkMove(board, pos, target, roll));
+	}
+
+	@Test
 	public void valid_move_5(){
 		Board board = new Board("");
 		Position pos = new Position(board.rooms.get(1));

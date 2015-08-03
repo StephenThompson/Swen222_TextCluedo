@@ -161,8 +161,10 @@ public class Board {
 			PosInfo posInfo = nextPos.poll();
 			if(!validMoves.contains(posInfo.pos)){
 				validMoves.add(posInfo.pos);
-				for(Position neighbour : getSurroundingPositions(posInfo.pos)){
-					nextPos.add(new PosInfo(neighbour, diceRoll-1));
+				if(posInfo.movesLeft>0){
+					for(Position neighbour : getSurroundingPositions(posInfo.pos)){
+						nextPos.add(new PosInfo(neighbour, posInfo.movesLeft-1));
+					}
 				}
 			}
 		}
