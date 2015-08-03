@@ -37,22 +37,26 @@ public class TextClient {
 		if(originalPos.isRoom()){
 			System.out.println("You are in room " + originalPos.getRoom().getName());
 		}else{
-			System.out.println("You are at this point " + originalPos.getX() +","+ originalPos.getY());
+			System.out.println("You are at this point " + (char)(originalPos.getX()+65) +","+ (originalPos.getY()+1));
+		}
+		List<Room> reachable = goc.getReachableRooms(diceRoll);
+		System.out.println("You can reach these rooms : ");
+		for (int i = 0; i < reachable.size(); i++){
+			System.out.printf("%2d. %s%n", i + 1, reachable.get(i).toString());
 		}
 		System.out.println("1. Enter X-Coordinate or name of room");
-		List<Room> reachable = goc.getReachableRooms(diceRoll);
-		System.out.println("You can reach these rooms : " + reachable.toString());
+		
 		Position newPos = null;
-		if(inScanner.hasNextInt()){
-			int x = readInt("");
-			int y = readInt("Enter Y-coordinate");
+		if(inScanner.hasNext("[a-zA-Z]")){
+			int x = (Character.toUpperCase(readChar(""))) - 65;
+			int y = readInt("Enter Y-coordinate") - 1;
 			newPos = new Position(x,y);
 		}else{
-			String input = inScanner.nextLine();
+			int roomIndex = readInt("") - 1;
 			for(Room r : reachable){
-				//if (r.getName().equals(input)){
+				if (r.getName().equals(reachable.get(roomIndex).toString())){
 					newPos = new Position(r);
-				//}
+				}
 			}
 		}
 		if(newPos!=null && goc.validMove(newPos)){
@@ -175,7 +179,7 @@ public class TextClient {
 					getAccuse();
 					break;
 			}
-			goc.nextPlayer();
+			goc.endTurn();
 		}
 		//End game
 	}
@@ -187,6 +191,16 @@ public class TextClient {
 		}else{
 			inScanner.nextLine();
 			return -1;
+		}
+	}
+
+	private char readChar(String msg) {
+		System.out.println(msg);
+		if(inScanner.hasNext("[a-zA-Z]")){
+			return inScanner.next("[a-zA-Z]").charAt(0);
+		}else{
+			inScanner.nextLine();
+			return '\0';
 		}
 	}
 

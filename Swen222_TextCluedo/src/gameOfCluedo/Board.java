@@ -93,7 +93,7 @@ public class Board {
 		if(!playerPos.containsKey(player)){return;}
 		playerPos.put(player, pos);
 		if(!pos.isRoom()){
-			System.out.println(player.getName() + "is now at" + pos.getX() + "," + pos.getY());
+			System.out.println(player.getName() + "is now at " + (char)(pos.getX()+65) + "," + (pos.getY()+1));
 		}else{
 			System.out.println(player.getName() + " is now in " + pos.getRoom());
 		}
@@ -250,8 +250,8 @@ public class Board {
 			System.out.print(" " + (char)(x+65));
 		}
 		System.out.println();
-
-		String boardASCII[] = {
+		char[] CharacterToken = {'S', 'M', 'W', 'G', 'E', 'P'}; 
+		String[] boardASCII = {
 				   "┌──────────┬─────┘ ░│      │ ░└───┐ ┌────────────┐",
 				   "│▒         │ ░ ░ ░ ░│      │ ░ ░ ░└─┤           ▒│",
 				   "│          │ ░ ░┌───┘      └───┐ ░ ░│Conservatory│",
@@ -280,10 +280,15 @@ public class Board {
 
 		for (int y=0; y < board[0].length; y++){
 
-			System.out.printf("%2d ", y);
+			System.out.printf("%2d ", y+1);
 			for(int x =0; x<board.length; x++){
 				if (playerPos.containsValue(new Position(x,y))){
-					System.out.print(" ©");
+					for (Player p : playerPos.keySet()){
+						if (playerPos.get(p).equals(new Position(x,y))){
+							System.out.print(" " +CharacterToken[p.getName().ordinal()]);
+							break;
+						}
+					}
 				} else {
 					System.out.print(boardASCII[y].substring(x*2, x*2+2));
 				}
@@ -291,24 +296,4 @@ public class Board {
 			System.out.println();
 		}
 	}
-
-/*
- *
-					/*if(board[x][y] instanceof BlankSquare){
-						//System.out.print("▗▚");
-						System.out.print(" ░");
-					}else if(board[x][y] instanceof RoomSquare){
-						System.out.print("▐█");
-					}else if (board[x][y] instanceof DoorSquare){
-						//System.out.print("▕░");
-						if (board[x][y+1] instanceof RoomSquare)
-							System.out.print("↓↓");
-						else if (board[x-1][y] instanceof RoomSquare)
-							System.out.print(" ←");
-						else if (board[x][y-1] instanceof RoomSquare)
-							System.out.print("↑↑");
-						else if (board[x+1][y] instanceof RoomSquare)
-							System.out.print(" →");
-					}*/
-
 }
