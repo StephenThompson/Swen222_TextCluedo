@@ -37,7 +37,7 @@ public class TextClient {
 		if(originalPos.isRoom()){
 			System.out.println("You are in room " + originalPos.getRoom().getName());
 		}else{
-			System.out.println("You are at this point " + originalPos.getX() +","+ originalPos.getY());
+			System.out.println("You are at this point " + (char)(originalPos.getX()+65) +","+ originalPos.getY());
 		}
 		System.out.println("1. Enter X-Coordinate or name of room");
 		List<Room> reachable = goc.getReachableRooms(diceRoll);

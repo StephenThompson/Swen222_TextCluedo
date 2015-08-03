@@ -64,7 +64,6 @@ public class Test_validMoves {
 		assertTrue(checkMove(board, pos, target, roll));
 	}
 
-
 	public boolean checkMove(Board b, Position p, Position target, int roll){
 		return b.validMove(p, target, roll);
 	}
