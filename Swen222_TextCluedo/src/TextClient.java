@@ -190,7 +190,7 @@ public class TextClient {
 					getAccuse();
 					break;
 			}
-			//goc.endTurn();
+			goc.endTurn();
 		}
 		//End game
 	}
