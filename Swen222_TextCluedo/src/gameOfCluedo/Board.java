@@ -48,6 +48,7 @@ public class Board {
 					String room = s.next();
 					//Checks string was 1 char
 					if(room.length()!=1){
+						s.close();
 						throw new IOException("Invalid string");
 					}
 					//gets char
@@ -107,9 +108,9 @@ public class Board {
 		if(!playerPos.containsKey(player)){return;}
 		playerPos.put(player, pos);
 		if(!pos.isRoom()){
-			System.out.println(player.getName() + "is now at " + (char)(pos.getX()+65) + "," + (pos.getY()+1));
+			System.out.println(player.getName().name().replace('_', ' ') + " is now at " + (char)(pos.getX()+65) + "," + (pos.getY()+1));
 		}else{
-			System.out.println(player.getName() + " is now in " + pos.getRoom() + (char)(pos.getX()+65) + "," + (pos.getY()+1));
+			System.out.println(player.getName().name().replace('_', ' ') + " is now in " + pos.getRoom());
 		}
 	}
 
@@ -189,7 +190,7 @@ public class Board {
 		while(!nextPos.isEmpty()){
 			PosInfo posInfo = nextPos.poll();
 			if(!validMoves.contains(posInfo.pos)){
-				if(!playerPos.containsValue(posInfo.pos)){
+				if(!posInfo.pos.isRoom()&&!playerPos.containsValue(posInfo.pos)){
 					validMoves.add(posInfo.pos);
 				}
 				if(posInfo.movesLeft>0&&!posInfo.pos.isRoom()){
