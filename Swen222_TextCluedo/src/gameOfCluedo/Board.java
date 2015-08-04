@@ -21,7 +21,7 @@ public class Board {
 	public final List<Room> rooms = new ArrayList<Room>();
 	private final String[] roomTitles = {"Kitchen","Ball Room", "Conservatory", "Dining Room",
 										"Billiard Room", "Library", "Lounge", "Hall", "Study"};
-	private final int[][] roomCoordinates = {{1,5},{10,6},{19,4}, {2,14},{9,12},{19,18},{2,23}, {10,23}, {19,24}};
+	private final int[][] roomCoordinates = {{1,4},{10,5},{19,3}, {2,13},{19,11},{19,17},{2,22}, {10,22}, {19,23}};
 	private Map<Player, Position> playerPos = new HashMap<Player, Position>();
 	private final int[][] startingPositions = {{9,0}, {14,0}, {23,6}, {23,19}, {7, 24}, {0, 17}};
 
@@ -96,7 +96,7 @@ public class Board {
 		if(!pos.isRoom()){
 			System.out.println(player.getName() + "is now at " + (char)(pos.getX()+65) + "," + (pos.getY()+1));
 		}else{
-			System.out.println(player.getName() + " is now in " + pos.getRoom());
+			System.out.println(player.getName() + " is now in " + pos.getRoom() + (char)(pos.getX()+65) + "," + (pos.getY()+1));
 		}
 	}
 
@@ -292,15 +292,27 @@ public class Board {
 				   "└────────────┘ ░┌─┴──────────┴─┐ ░└──────────────┘"};
 
 		for (int y=0; y < board[0].length; y++){
-
 			System.out.printf("%2d ", y+1);
+			
 			for(int x =0; x<board.length; x++){
-				if (playerPos.containsValue(new Position(x,y))){
-					for (Player p : playerPos.keySet()){
-						if (playerPos.get(p).equals(new Position(x,y))){
-							System.out.print(" " +CharacterToken[p.getName().ordinal()]);
-							break;
+				Set<Player> atPos = new HashSet<Player>();
+				for (Player p : playerPos.keySet()){
+					if (playerPos.get(p).equals(new Position(x,y))){
+						atPos.add(p);
+					}
+				}
+				if (atPos.size() > 0){
+					System.out.print(" ");
+					for (Player p : atPos){
+						if (playerPos.get(p).isRoom()){
+							System.out.print(CharacterToken[p.getName().ordinal()]);
+						} else {
+							System.out.print(CharacterToken[p.getName().ordinal()]);
 						}
+					}
+					x += atPos.size()/2;
+					if (atPos.size() > 1 && atPos.size() % 2 == 0){
+						System.out.print(boardASCII[y].substring(x*2+1, x*2+2));
 					}
 				} else {
 					System.out.print(boardASCII[y].substring(x*2, x*2+2));
