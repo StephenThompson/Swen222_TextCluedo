@@ -17,10 +17,19 @@ public class Player {
 		this.name = name;
 	}
 
+	/**
+	 * Get player name
+	 * @return
+	 */
 	public Character getName(){
 		return name;
 	}
 
+	/**
+	 * Checks to see if you have a card in a guess from another player and return said card
+	 * @param guess
+	 * @return
+	 */
 	public Card checkGuess(GuessTuple guess){
 		long seed = System.nanoTime();
 		Collections.shuffle(hand, new Random(seed));
@@ -43,10 +52,18 @@ public class Player {
 		return null;
 	}
 
+	/**
+	 *Returns players hand
+	 * @return
+	 */
 	public List<Card> gethand(){
 		return hand;
 	}
 
+	/**
+	 * Add a card to players hand
+	 * @param c
+	 */
 	public void addToHand(Card c){
 		hand.add(c);
 	}

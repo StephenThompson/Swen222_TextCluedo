@@ -6,12 +6,21 @@ public class Position {
 	private Room room;
 	private int x, y;
 
+	/**
+	 * Creats Position from co-ordinate
+	 * @param x
+	 * @param y
+	 */
 	public Position(int x, int y) {
 		super();
 		this.x = x;
 		this.y = y;
 	}
 
+	/**
+	 * Creates position from room, creates co-ordinate of room aswell
+	 * @param room
+	 */
 	public Position(Room room) {
 		super();
 		this.room = room;
@@ -19,6 +28,10 @@ public class Position {
 		this.y = room.getY();
 	}
 
+	/**
+	 * Check if this position is a room
+	 * @return
+	 */
 	public boolean isRoom(){
 		if(room!=null){
 			return true;
@@ -26,6 +39,10 @@ public class Position {
 		return false;
 	}
 
+	/**
+	 * Gets room
+	 * @return
+	 */
 	public Room getRoom() {
 		return room;
 	}

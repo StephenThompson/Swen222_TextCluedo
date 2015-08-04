@@ -72,9 +72,17 @@ public class Board {
 	 * Adds player to map at their starting location
 	 * @param player
 	 */
-	public void addPlayers(Player player){
+	public void addPlayer(Player player){
 		Position pos = new Position(startingPositions[player.getName().ordinal()][0], startingPositions[player.getName().ordinal()][1]);
 		playerPos.put(player, pos);
+	}
+
+	/**
+	 * Removes player from board and map
+	 * @param player
+	 */
+	public void removePlayer(Player player){
+		playerPos.remove(player);
 	}
 
 	/**
@@ -90,6 +98,11 @@ public class Board {
 		}
 	}
 
+	/**
+	 * Sets a players position on the board
+	 * @param player
+	 * @param pos
+	 */
 	public void setPlayerPosition(Player player, Position pos){
 		if(!playerPos.containsKey(player)){return;}
 		playerPos.put(player, pos);
@@ -133,7 +146,7 @@ public class Board {
 	}
 
 	/**
-	 * Recursive flood algorithm to find valid move or not.
+	 * Checks if player can move to target from current position, given the roll of the dice
 	 * @param p
 	 * @param target
 	 * @param diceRoll
@@ -144,6 +157,13 @@ public class Board {
 		return getValidMoves(orgPos, diceRoll).contains(target);
 	}
 
+	/**
+	 * Checks if can make it from one position to another, given the roll of the dice
+	 * @param pos
+	 * @param target
+	 * @param diceRoll
+	 * @return
+	 */
 	public boolean validMove(Position pos, Position target, int diceRoll){
 		return getValidMoves(pos, diceRoll).contains(target);
 	}
@@ -185,7 +205,7 @@ public class Board {
 	}
 
 	/**
-	 * Usd for iterative flood on positions of board
+	 * Used for iterative flood on positions of board
 	 * @author gillcall1
 	 *
 	 */
@@ -246,6 +266,9 @@ public class Board {
 		rooms.get(6).setPassage(rooms.get(2));
 	}
 
+	/**
+	 * Setup the entrances for the rooms
+	 */
 	private void setupEntrances(){
 		//Setup entrances
 		for(int x = 0; x<board.length; x++){
@@ -257,6 +280,9 @@ public class Board {
 		}
 	}
 
+	/**
+	 * Draws the board and players
+	 */
 	public void draw(){
 		System.out.print("   ");
 		for(int x =0; x<board.length; x++){
@@ -290,12 +316,13 @@ public class Board {
 				   "│            │ ░ ░│          │ ░ ░│    Study     │",
 				   "│▒           │ ░ ░│          │ ░ ░│             ▒│",
 				   "└────────────┘ ░┌─┴──────────┴─┐ ░└──────────────┘"};
-
+		//Draw board
 		for (int y=0; y < board[0].length; y++){
 			System.out.printf("%2d ", y+1);
 
 			for(int x =0; x<board.length; x++){
 				Set<Player> atPos = new HashSet<Player>();
+				//Draw players
 				for (Player p : playerPos.keySet()){
 					if (playerPos.get(p).equals(new Position(x,y))){
 						atPos.add(p);
