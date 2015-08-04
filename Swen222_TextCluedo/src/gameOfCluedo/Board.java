@@ -190,7 +190,7 @@ public class Board {
 		while(!nextPos.isEmpty()){
 			PosInfo posInfo = nextPos.poll();
 			if(!validMoves.contains(posInfo.pos)){
-				if(!posInfo.pos.isRoom()&&!playerPos.containsValue(posInfo.pos)){
+				if(!playerPos.containsValue(posInfo.pos)){ //FIXME
 					validMoves.add(posInfo.pos);
 				}
 				if(posInfo.movesLeft>0&&!posInfo.pos.isRoom()){
