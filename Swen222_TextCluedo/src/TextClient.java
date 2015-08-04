@@ -69,6 +69,10 @@ public class TextClient {
 		}
 		if(newPos!=null && goc.validMove(newPos, diceRoll)){
 			goc.move(newPos);
+			if(newPos.isRoom()){
+				System.out.println("You can make a suggestion.");
+				getSuggest();
+			}
 		}
 	}
 

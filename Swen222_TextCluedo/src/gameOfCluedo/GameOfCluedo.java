@@ -12,6 +12,7 @@ public class GameOfCluedo {
 	private Player currentPlayer;
 	private Deck deck;
 	private GuessTuple envelope;
+	private Player winner = null;
 
 	public GameOfCluedo() {
 		super();
@@ -190,5 +191,9 @@ public class GameOfCluedo {
 	 */
 	public void drawBoard(){
 		board.draw();
+	}
+
+	public void gameOver(Player winner){
+		this.winner = winner;
 	}
 }
