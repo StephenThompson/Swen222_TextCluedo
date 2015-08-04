@@ -79,7 +79,7 @@ public class Test_validMoves {
 	@Test
 	public void invalid_move_4(){
 		Board board = new Board("");
-		board.addPlayers(new Player(Player.Character.Miss_Scarlett));
+		board.addPlayer(new Player(Player.Character.Miss_Scarlett));
 		Position pos = new Position(7,1);
 		Position target = new Position(9,0);
 		int roll = 6;

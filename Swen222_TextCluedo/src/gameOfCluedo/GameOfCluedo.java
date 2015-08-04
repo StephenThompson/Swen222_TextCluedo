@@ -62,7 +62,7 @@ public class GameOfCluedo {
 		for(int i=0; i<numPlayers; i++){
 			Player newPlayer = new Player(Player.Character.values()[i]);
 			players.add(newPlayer);
-			board.addPlayers(newPlayer);
+			board.addPlayer(newPlayer);
 		}
 
 		deck = new Deck(charCards, weaponCards, roomCards);
@@ -157,6 +157,12 @@ public class GameOfCluedo {
 		return currentPlayer;
 	}
 
+	/**
+	 * Check if move to new position valid with dice roll for current player
+	 * @param newPos
+	 * @param diceRoll
+	 * @return
+	 */
 	public boolean validMove(Position newPos, int diceRoll){
 		if(newPos.isRoom()||(newPos.getX()>=0 && newPos.getY()>=0 && newPos.getX()<board.xSize && newPos.getY()<board.ySize)){
 			return board.validMove(currentPlayer, newPos, diceRoll);
@@ -194,6 +200,10 @@ public class GameOfCluedo {
 		board.draw();
 	}
 
+	/**
+	 * Returns winner of game
+	 * @return
+	 */
 	public Player getWinner(){
 		if(players.size()-eliminated.size()<=1){
 			players.removeAll(eliminated);
@@ -202,14 +212,28 @@ public class GameOfCluedo {
 		return winner;
 	}
 
+	/**
+	 * Set winner
+	 * @param winner
+	 */
 	public void setWinner(Player winner){
 		this.winner = winner;
 	}
 
+	/**
+	 * Adds player to eliminated list and removes them from board
+	 * @param loser
+	 */
 	public void playerLost(Player loser){
 		eliminated.add(loser);
+		board.removePlayer(loser);
 	}
 
+	/**
+	 * Check if player is eliminated
+	 * @param p
+	 * @return
+	 */
 	public boolean isEliminated(Player p){
 		return eliminated.contains(p);
 	}
