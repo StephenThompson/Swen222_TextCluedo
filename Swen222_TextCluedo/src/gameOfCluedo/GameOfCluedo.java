@@ -129,7 +129,7 @@ public class GameOfCluedo {
 	 * @return boolean
 	 */
 	public boolean checkGameOver(){
-		return players.size() == 1;
+		return players.size()-eliminated.size() <= 1||winner!=null;
 	}
 
 	/**
@@ -193,7 +193,23 @@ public class GameOfCluedo {
 		board.draw();
 	}
 
-	public void gameOver(Player winner){
+	public Player getWinner(){
+		if(players.size()-eliminated.size()<=1){
+			players.removeAll(eliminated);
+			winner=players.get(0);
+		}
+		return winner;
+	}
+
+	public void setWinner(Player winner){
 		this.winner = winner;
+	}
+
+	public void playerLost(Player loser){
+		eliminated.add(loser);
+	}
+
+	public boolean isEliminated(Player p){
+		return eliminated.contains(p);
 	}
 }

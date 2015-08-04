@@ -159,6 +159,9 @@ public class Board {
 		Set<Position> validMoves = new HashSet<Position>();
 		Queue<PosInfo> nextPos = new ArrayDeque<PosInfo>();
 		//Add all surrounding positions to queue
+		if(pos.isRoom()&&pos.getRoom().getPassage()!=null){
+			validMoves.add(new Position(pos.getRoom().getPassage()));
+		}
 		for(Position p : getSurroundingPositions(pos)){
 			nextPos.add(new PosInfo(p, diceRoll-1));
 		}

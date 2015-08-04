@@ -153,9 +153,10 @@ public class TextClient {
 		GuessTuple guess = new GuessTuple(character, weapon, room);
 		if (goc.accuse(guess)){
 			System.out.println("You win");
-			//goc.gameOver
+			goc.setWinner(goc.getCurrentPlayer());
 		} else {
 			System.out.println("You lost");
+			goc.playerLost(goc.getCurrentPlayer());
 		}
 	}
 
@@ -179,11 +180,12 @@ public class TextClient {
 
 		//Loop through players until game has ended
 		while (!goc.checkGameOver()){
-		//	Ask player option
+			//	Ask player option
 			Player currentPlayer = goc.getCurrentPlayer();
-			PlayerOption opt = playerTurn(currentPlayer);
-		//	Respond to player's choice
-			switch (opt){
+			if(!goc.isEliminated(currentPlayer)){
+				PlayerOption opt = playerTurn(currentPlayer);
+				//	Respond to player's choice
+				switch (opt){
 				case MOVE:
 					getMove(Dice.roll(), currentPlayer);
 					break;
@@ -193,9 +195,12 @@ public class TextClient {
 				case ACCUSE:
 					getAccuse();
 					break;
+				}
 			}
 			goc.endTurn();
 		}
+		System.out.println("GAME OVER!!!!!!!!!!!");
+		System.out.println("The winner was : " + goc.getWinner().getName());
 		//End game
 	}
 
