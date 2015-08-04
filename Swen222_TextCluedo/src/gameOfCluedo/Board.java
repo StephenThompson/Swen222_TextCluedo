@@ -162,6 +162,7 @@ public class Board {
 		if(pos.isRoom()&&pos.getRoom().getPassage()!=null){
 			validMoves.add(new Position(pos.getRoom().getPassage()));
 		}
+		//Add surrounding positions to queue
 		for(Position p : getSurroundingPositions(pos)){
 			nextPos.add(new PosInfo(p, diceRoll-1));
 		}

@@ -7,8 +7,8 @@ import java.util.List;
 public class GameOfCluedo {
 	private Board board;
 	private List<Room> rooms;
-	private List<Player> players;
-	private List<Player> eliminated;
+	private List<Player> players = new ArrayList<Player>();
+	private List<Player> eliminated =  new ArrayList<Player>();
 	private Player currentPlayer;
 	private Deck deck;
 	private GuessTuple envelope;
@@ -58,6 +58,7 @@ public class GameOfCluedo {
 
 		// Setup game
 		players = new ArrayList<Player>();
+		eliminated = new ArrayList<Player>();
 		for(int i=0; i<numPlayers; i++){
 			Player newPlayer = new Player(Player.Character.values()[i]);
 			players.add(newPlayer);
