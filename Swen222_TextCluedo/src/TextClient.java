@@ -109,12 +109,8 @@ public class TextClient {
 	 * Asks player to make a suggestion
 	 */
 	private void getSuggest(){
-		//TODO move these to a static
-		String charList[] = {"Miss Scarlett", "Colonel Mustard", "Mrs. White", "The Reverend Green",
-				"Mrs. Peacock", "Professor Plum"};
-
-		String weaponList[] = {"Candlestick", "Dagger", "Lead Pipe", "Revolver",
-				"Rope", "Spanner"};
+		String[] charList = GameOfCluedo.charList;
+		String[] weaponList = GameOfCluedo.weaponList;
 
 		System.out.println("- Guess");
 		//Get Room (room that you are in)
@@ -153,15 +149,9 @@ public class TextClient {
 	 * Asks player to make accusation
 	 */
 	private void getAccuse(){
-		//TODO STATIC FIELDS
-		String charList[] = {"Miss Scarlett", "Colonel Mustard", "Mrs. White", "The Reverend Green",
-				"Mrs. Peacock", "Professor Plum"};
-
-		String weaponList[] = {"Candlestick", "Dagger", "Lead Pipe", "Revolver",
-				"Rope", "Spanner"};
-
-		String roomList[] = {"Kitchen", "Ball Room", "Conservatory", "Dining Room",
-				"Billard Room", "Library",  "Lounge",  "Hall",  "Study"};
+		String[] charList = GameOfCluedo.charList;
+		String[] roomList = GameOfCluedo.roomList;
+		String[] weaponList = GameOfCluedo.weaponList;
 
 		System.out.println("- Accuse");
 

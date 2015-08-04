@@ -1,6 +1,7 @@
 package gameOfCluedo;
 
 import gameOfCluedo.cards.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,15 @@ public class GameOfCluedo {
 	private Deck deck;
 	private GuessTuple envelope;
 	private Player winner = null;
+
+	public final  static String charList[] = {"Miss Scarlett", "Colonel Mustard", "Mrs. White", "The Reverend Green",
+			"Mrs. Peacock", "Professor Plum"};
+
+	public final  static String weaponList[] = {"Candlestick", "Dagger", "Lead Pipe", "Revolver",
+			"Rope", "Spanner"};
+
+	public final  static String roomList[] = {"Kitchen", "Ball Room", "Conservatory", "Dining Room",
+			"Billard Room", "Library",  "Lounge",  "Hall",  "Study"};
 
 	public GameOfCluedo() {
 		super();
