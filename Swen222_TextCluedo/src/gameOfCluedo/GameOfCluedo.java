@@ -7,7 +7,6 @@ import java.util.List;
 
 public class GameOfCluedo {
 	private Board board;
-	private List<Room> rooms;
 	private List<Player> players = new ArrayList<Player>();
 	private List<Player> eliminated =  new ArrayList<Player>();
 	private Player currentPlayer;

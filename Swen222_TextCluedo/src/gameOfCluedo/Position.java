@@ -1,7 +1,5 @@
 package gameOfCluedo;
 
-import java.awt.Point;
-
 public class Position {
 	private Room room;
 	private int x, y;

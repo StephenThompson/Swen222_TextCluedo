@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -31,6 +29,7 @@ public class TextClient {
 		}
 		//Ask player for choice and print options
 		System.out.println("\n" + p.getName().name() + "'s turn!\n");
+		printPlayerHand(p);
 		System.out.println("\n-- Make a choice --");
 		for(int i=0; i<options.length; i++){
 			System.out.println(i+1 + "\t"+options[i].name());
@@ -190,6 +189,19 @@ public class TextClient {
 			System.out.println("You lost");
 			goc.playerLost(goc.getCurrentPlayer());//Wrong remove player from play
 		}
+	}
+
+	/**
+	 * Prints a players hand to the output
+	 * @param p
+	 */
+	private void printPlayerHand(Player p){
+		List<Card> hand = p.gethand();
+		System.out.println(p.getName().name() + "'s hand contains : ");
+		for(int i = 0; i<hand.size()-1; i++){
+			System.out.print(hand.get(i).toString() + ", ");
+		}
+		System.out.println(hand.get(hand.size()-1));
 	}
 
 	/**
