@@ -16,7 +16,7 @@ public class GameOfCluedo {
 
 	public GameOfCluedo() {
 		super();
-		this.board = new Board("");
+		this.board = new Board("src/CluedoBoard.txt");
 	}
 
 	/**

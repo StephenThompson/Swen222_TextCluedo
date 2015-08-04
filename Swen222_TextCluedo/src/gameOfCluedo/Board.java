@@ -29,7 +29,7 @@ public class Board {
 		createRooms();
 		//Scan File to create board
 		try{
-			Scanner s = new Scanner(new File("src/CluedoBoard.txt"));
+			Scanner s = new Scanner(new File(file));
 			int xPos = 0;
 			int yPos = 0;
 			while(s.hasNext()){
@@ -293,7 +293,7 @@ public class Board {
 
 		for (int y=0; y < board[0].length; y++){
 			System.out.printf("%2d ", y+1);
-			
+
 			for(int x =0; x<board.length; x++){
 				Set<Player> atPos = new HashSet<Player>();
 				for (Player p : playerPos.keySet()){
