@@ -80,6 +80,8 @@ public class TextClient {
 				"Rope", "Spanner"};
 
 		System.out.println("- Guess");
+		//Room
+		System.out.println("You are accusing in room " + goc.getPlayerPos().getRoom().getName());
 		// Character
 		System.out.println("Choose your character");
 		for (int i = 0; i < charList.length; i++){
@@ -96,7 +98,7 @@ public class TextClient {
 
 		CharCard character = new CharCard(charList[charChoice]);
 		WeaponCard weapon = new WeaponCard(weaponList[weaponChoice]);
-		RoomCard room = new RoomCard("Kitchen");
+		RoomCard room = new RoomCard(goc.getPlayerPos().getRoom().getName());
 
 		GuessTuple guess = new GuessTuple(character, weapon, room);
 		Card back = goc.guess(guess);
@@ -147,6 +149,7 @@ public class TextClient {
 		GuessTuple guess = new GuessTuple(character, weapon, room);
 		if (goc.accuse(guess)){
 			System.out.println("You win");
+			//goc.gameOver
 		} else {
 			System.out.println("You lost");
 		}
@@ -187,7 +190,7 @@ public class TextClient {
 					getAccuse();
 					break;
 			}
-			//goc.endTurn();
+			goc.endTurn();
 		}
 		//End game
 	}

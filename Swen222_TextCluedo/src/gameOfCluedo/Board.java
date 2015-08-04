@@ -165,7 +165,9 @@ public class Board {
 		while(!nextPos.isEmpty()){
 			PosInfo posInfo = nextPos.poll();
 			if(!validMoves.contains(posInfo.pos)){
-				validMoves.add(posInfo.pos);
+				if(!playerPos.containsValue(posInfo.pos)){
+					validMoves.add(posInfo.pos);
+				}
 				if(posInfo.movesLeft>0&&!posInfo.pos.isRoom()){
 					for(Position neighbour : getSurroundingPositions(posInfo.pos)){
 						nextPos.add(new PosInfo(neighbour, posInfo.movesLeft-1));
