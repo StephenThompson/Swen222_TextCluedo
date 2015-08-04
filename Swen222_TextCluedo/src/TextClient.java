@@ -38,7 +38,7 @@ public class TextClient {
 	}
 
 	private void getMove(int diceRoll, Player player){
-		System.out.println("You Rolled a : " + diceRoll);
+		System.out.println("You Rolled a " + diceRoll);
 		Position originalPos = goc.getPlayerPos();
 		if(originalPos.isRoom()){
 			System.out.println("You are in room " + originalPos.getRoom().getName());
@@ -46,16 +46,19 @@ public class TextClient {
 			System.out.println("You are at this point " + (char)(originalPos.getX()+65) +","+ (originalPos.getY()+1));
 		}
 		List<Room> reachable = goc.getReachableRooms(diceRoll);
-		System.out.println("You can reach these rooms : ");
-		for (int i = 0; i < reachable.size(); i++){
-			System.out.printf("%2d. %s%n", i + 1, reachable.get(i).toString());
+		if (reachable.size() > 0){
+			System.out.println("You can reach these rooms : ");
+			for (int i = 0; i < reachable.size(); i++){
+				System.out.printf("%2d. %s%n", i + 1, reachable.get(i).toString());
+			}
+			System.out.println("1. Enter X-Coordinate or name of room");
+		} else {
+			System.out.println("1. Enter X-Coordinate: ");
 		}
-		System.out.println("1. Enter X-Coordinate or name of room");
-
 		Position newPos = null;
 		if(inScanner.hasNext("[a-zA-Z]")){
 			int x = (Character.toUpperCase(readChar(""))) - 65;
-			int y = readInt("Enter Y-coordinate") - 1;
+			int y = readInt("Enter Y-coordinate: ") - 1;
 			newPos = new Position(x,y);
 		}else if (inScanner.hasNextInt()){
 			int roomIndex = readInt("") - 1;
