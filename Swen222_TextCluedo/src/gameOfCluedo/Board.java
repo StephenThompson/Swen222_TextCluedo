@@ -21,6 +21,7 @@ public class Board {
 	public final List<Room> rooms = new ArrayList<Room>();
 	private final String[] roomTitles = {"Kitchen","Ball Room", "Conservatory", "Dining Room",
 										"Billiard Room", "Library", "Lounge", "Hall", "Study"};
+	private final int[][] roomCoordinates = {{1,5},{10,6},{19,4}, {2,14},{9,12},{19,18},{2,23}, {10,23}, {19,24}};
 	private Map<Player, Position> playerPos = new HashMap<Player, Position>();
 	private final int[][] startingPositions = {{9,0}, {14,0}, {23,6}, {23,19}, {7, 24}, {0, 17}};
 
@@ -157,7 +158,10 @@ public class Board {
 	public Set<Position> getValidMoves(Position pos,  int diceRoll){
 		Set<Position> validMoves = new HashSet<Position>();
 		Queue<PosInfo> nextPos = new ArrayDeque<PosInfo>();
-		nextPos.add(new PosInfo(pos, diceRoll));
+		//Add all surrounding positions to queue
+		for(Position p : getSurroundingPositions(pos)){
+			nextPos.add(new PosInfo(p, diceRoll-1));
+		}
 		while(!nextPos.isEmpty()){
 			PosInfo posInfo = nextPos.poll();
 			if(!validMoves.contains(posInfo.pos)){
@@ -169,6 +173,8 @@ public class Board {
 				}
 			}
 		}
+		//Remove original position
+		validMoves.remove(pos);
 		return validMoves;
 	}
 
@@ -221,7 +227,7 @@ public class Board {
 	private void createRooms(){
 		//Creates rooms
 		for(int i = 0; i<roomTitles.length; i++){
-			rooms.add(new Room(roomTitles[i], null, new ArrayList<Position>()));
+			rooms.add(new Room(roomTitles[i], null, new ArrayList<Position>(),roomCoordinates[i][0],roomCoordinates[i][1]));
 		}
 		//Create passages
 		//Kitchen->Study

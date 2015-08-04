@@ -6,12 +6,16 @@ public class Room {
 	private String name;
 	private Room passage;
 	private List<Position> entrances;
+	private int x;
+	private int y;
 
-	public Room(String name, Room passage, List<Position> entrances) {
+	public Room(String name, Room passage, List<Position> entrances, int x, int y) {
 		super();
 		this.name = name;
 		this.passage = passage;
 		this.entrances = entrances;
+		this.x = x;
+		this.y = y;
 	}
 
 	public String getName() {
@@ -28,6 +32,14 @@ public class Room {
 
 	public List<Position> getEntrances() {
 		return entrances;
+	}
+
+	public int getY(){
+		return y;
+	}
+
+	public int getX(){
+		return x;
 	}
 
 	/**

@@ -15,6 +15,8 @@ public class Position {
 	public Position(Room room) {
 		super();
 		this.room = room;
+		this.x = room.getX();
+		this.y = room.getY();
 	}
 
 	public boolean isRoom(){
