@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import gameOfCluedo.Board;
+import gameOfCluedo.Player;
 import gameOfCluedo.Position;
 
 public class Test_validMoves {
@@ -71,6 +72,16 @@ public class Test_validMoves {
 		Board board = new Board("");
 		Position pos = new Position(7, 5);
 		Position target = new Position(board.rooms.get(2));
+		int roll = 6;
+		assertFalse(checkMove(board, pos, target, roll));
+	}
+
+	@Test
+	public void invalid_move_4(){
+		Board board = new Board("");
+		board.addPlayers(new Player(Player.Character.Miss_Scarlett));
+		Position pos = new Position(7,1);
+		Position target = new Position(9,0);
 		int roll = 6;
 		assertFalse(checkMove(board, pos, target, roll));
 	}
