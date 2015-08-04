@@ -72,6 +72,10 @@ public class TextClient {
 		}
 		if(newPos!=null && goc.validMove(newPos, diceRoll)){
 			goc.move(newPos);
+			if(newPos.isRoom()){
+				System.out.println("You can make a suggestion.");
+				getSuggest();
+			}
 		}
 	}
 
@@ -83,6 +87,8 @@ public class TextClient {
 				"Rope", "Spanner"};
 
 		System.out.println("- Guess");
+		//Room
+		System.out.println("You are accusing in room " + goc.getPlayerPos().getRoom().getName());
 		// Character
 		System.out.println("Choose your character");
 		for (int i = 0; i < charList.length; i++){
@@ -99,7 +105,7 @@ public class TextClient {
 
 		CharCard character = new CharCard(charList[charChoice]);
 		WeaponCard weapon = new WeaponCard(weaponList[weaponChoice]);
-		RoomCard room = new RoomCard("Kitchen");
+		RoomCard room = new RoomCard(goc.getPlayerPos().getRoom().getName());
 
 		GuessTuple guess = new GuessTuple(character, weapon, room);
 		Card back = goc.guess(guess);
@@ -150,8 +156,10 @@ public class TextClient {
 		GuessTuple guess = new GuessTuple(character, weapon, room);
 		if (goc.accuse(guess)){
 			System.out.println("You win");
+			goc.setWinner(goc.getCurrentPlayer());
 		} else {
 			System.out.println("You lost");
+			goc.playerLost(goc.getCurrentPlayer());
 		}
 	}
 
@@ -175,11 +183,12 @@ public class TextClient {
 
 		//Loop through players until game has ended
 		while (!goc.checkGameOver()){
-		//	Ask player option
+			//	Ask player option
 			Player currentPlayer = goc.getCurrentPlayer();
-			PlayerOption opt = playerTurn(currentPlayer);
-		//	Respond to player's choice
-			switch (opt){
+			if(!goc.isEliminated(currentPlayer)){
+				PlayerOption opt = playerTurn(currentPlayer);
+				//	Respond to player's choice
+				switch (opt){
 				case MOVE:
 					getMove(Dice.roll(), currentPlayer);
 					break;
@@ -189,9 +198,12 @@ public class TextClient {
 				case ACCUSE:
 					getAccuse();
 					break;
+				}
 			}
 			goc.endTurn();
 		}
+		System.out.println("GAME OVER!!!!!!!!!!!");
+		System.out.println("The winner was : " + goc.getWinner().getName());
 		//End game
 	}
 
