@@ -5,6 +5,9 @@ import gameOfCluedo.Player;
 
 import java.util.*;
 
+/**
+ * This class represents the deck of cards in the game of Cluedo. It keeps
+ */
 public class Deck {
 	private List<CharCard> characters;
 	private List<WeaponCard> weapons;

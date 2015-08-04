@@ -1,9 +1,7 @@
 package gameOfCluedo.cards;
 
 /**
- * This class represents a character card in the game of cluedo
- * @author thompsstep2
- *
+ * This class represents a character card in the game of Cluedo.
  */
 public class CharCard extends Card {
 

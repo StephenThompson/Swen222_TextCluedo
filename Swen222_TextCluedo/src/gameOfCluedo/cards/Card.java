@@ -1,7 +1,10 @@
 package gameOfCluedo.cards;
 
+/**
+ * This class acts as an abstract class for the different type of cards found in the game of Cluedo.
+ */
 public abstract class Card {
-	private final String title;
+	private final String title; // The word shown on the card
 
 	public Card(String title) {
 		super();
