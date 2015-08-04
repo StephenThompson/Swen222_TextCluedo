@@ -33,4 +33,9 @@ public abstract class Card {
 		}
 		return false;
 	}
+
+	@Override
+	public String toString(){
+		return title;
+	}
 }
