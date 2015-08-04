@@ -100,6 +100,7 @@ public class TextClient {
 			}else{
 				//Invalid move
 				System.out.println("Invalid Move");
+				newPos=null;
 			}
 		}
 	}
