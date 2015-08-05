@@ -122,11 +122,6 @@ public class Board {
 	 */
 	public List<Room> reachableRooms(int diceRoll, Position startingPos){
 		List<Room> reachable = new ArrayList<Room>();
-		if(startingPos.isRoom()){
-			if(startingPos.getRoom().getPassage()!=null){
-				reachable.add(startingPos.getRoom().getPassage());
-			}
-		}
 		for(Position p : getValidMoves(startingPos, diceRoll)){
 			if(p.isRoom()){
 				reachable.add(p.getRoom());
@@ -179,7 +174,7 @@ public class Board {
 	public Set<Position> getValidMoves(Position pos,  int diceRoll){
 		Set<Position> validMoves = new HashSet<Position>();
 		Queue<PosInfo> nextPos = new ArrayDeque<PosInfo>();
-		//Add all surrounding positions to queue
+		//Add passage to set if original pos is a room with a passage
 		if(pos.isRoom()&&pos.getRoom().getPassage()!=null){
 			validMoves.add(new Position(pos.getRoom().getPassage()));
 		}
